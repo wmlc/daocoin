@@ -6,8 +6,8 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
             <li>
-                <a href="pages/widgets.html">
-                    <i class="fa fa-th"></i> <span>Widgets</span>
+                <a href="/OverView">
+                    <i class="fa fa-th"></i> <span>OverView</span>
                 </a>
             </li>
         </ul>

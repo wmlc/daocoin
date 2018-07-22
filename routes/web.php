@@ -15,3 +15,4 @@ Auth::routes();
 
 Route::get('/', 'IndexController@index')->name('index');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/OverView', 'OverViewController@index');

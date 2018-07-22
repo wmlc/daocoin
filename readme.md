@@ -1,4 +1,10 @@
 laravel 部署流程
+### 数据迁移
+php artisan make:migration create_users_table --create=users
+php artisan make:migration add_votes_to_users_table --table=users
+
+php artisan migrate
+ 
 
 1、修改文件权限
 ```
