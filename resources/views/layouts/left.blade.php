@@ -10,6 +10,22 @@
                     <i class="fa fa-th"></i> <span>OverView</span>
                 </a>
             </li>
+            <li>
+                <a href="/kyc">
+                    <i class="fa fa-th"></i> <span>KYC/AML</span>
+                </a>
+            </li>
+            <li>
+                <a href="/order">
+                    <i class="fa fa-th"></i> <span>Order</span>
+                </a>
+            </li>
+            <li>
+                <a href="/settings">
+                    <i class="fa fa-th"></i> <span>Settings</span>
+                </a>
+            </li>
+
         </ul>
     </section>
     <!-- /.sidebar -->
