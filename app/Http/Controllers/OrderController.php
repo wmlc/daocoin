@@ -24,7 +24,7 @@ class OrderController extends Controller
     public function index()
     {
         $id = Auth::id();
-        return view('home');
+        return view('order');
     }
 
 }
