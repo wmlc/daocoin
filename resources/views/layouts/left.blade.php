@@ -1,23 +1,16 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
+<!-- Left side column. contains the logo and sidebar -->
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu" data-widget="tree">
+            <li class="header">MAIN NAVIGATION</li>
+            <li>
+                <a href="pages/widgets.html">
+                    <i class="fa fa-th"></i> <span>Widgets</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>
