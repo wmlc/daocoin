@@ -1,0 +1,68 @@
+/* DaoCoin.css */
+.logo-space{
+    padding-right: 1rem;
+    height: 100%;
+    line-height: 100%;
+    font-size:25px;
+    display:inline-block;
+}
+
+#hero-section{
+	background: url(../../assets/img/images/coin-bg.jpg) no-repeat center;
+	background-size: cover;
+}
+
+.font-size-25{
+	font-size: 2.5rem;
+}
+
+.w-150{
+	width:150px;
+}
+
+.img-h-40{
+    height: 40px;
+}
+
+.min-height-30{
+	min-height: 3.5rem;
+}
+
+.word-break{
+    word-break: break-all;
+}   
+
+.modal-md{
+	width: 45rem;
+}
+.form-control1{
+	padding:0.4rem 1rem;
+}
+.select-control{
+    padding:0.4rem 1rem;
+    height: auto;
+}
+
+.js-validate{
+    background: #fff;
+}
+
+@media (max-width: 576px) {
+    .js-validate .pl-5{
+        padding-left: 1rem !important;
+    }
+    .js-validate .pr-5{
+        padding-right: 1rem !important;
+    }
+}
+.underline{
+	text-decoration: underline;
+}
+
+.w-md-85{
+    width:85% !important;
+}
+
+.tips-box{
+	display:none;
+}
