@@ -136,6 +136,16 @@
                                 FAQ
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a href="/home" class="nav-link u-header__nav-link">
+                                @if(!isset(Auth::user()->name))
+                                    Login
+                                @else
+                                    {{ Auth::user()->name }}
+                                @endif
+                            </a>
+                        </li>
                         <!-- End FAQ -->
 
                         <!-- Button -->
