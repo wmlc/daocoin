@@ -73,30 +73,25 @@
             <!-- ./col -->
         </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="box box-primary">
-                    <div class="box-body pad table-responsive">
-                        <h4>You can conver Flat to Token to Flat real time</h4>
-                        <table class="table table-bordered text-center">
-                            <tr>
-                                <td>
-                                    <button type="button" class="btn btn-block btn-default btn-lg">Redeem Token to Flat</button>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-block btn-primary btn-lg">Convert Flat to Token</button>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-block btn-success btn-lg">Trade Token in Exchange</button>
-                                </td>
-                            </tr>
-
-                        </table>
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">You can conver Flat to Token to Flat real time</h3>
+            </div>
+            <div class="box-body">
+                <!-- Split button -->
+                <div class="margin">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default">Redeem Token to Flat</button>
                     </div>
-                    <!-- /.box -->
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-info">Convert Flat to Token</button>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-success">Trade Token in Exchange</button>
+                    </div>
                 </div>
             </div>
-            <!-- /.col -->
+            <!-- /.box-body -->
         </div>
 </div>
 
