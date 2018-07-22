@@ -24,7 +24,7 @@ class KycController extends Controller
     public function index()
     {
         $id = Auth::id();
-        return view('home');
+        return view('kyc');
     }
 
 }
