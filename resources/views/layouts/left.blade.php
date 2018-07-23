@@ -7,22 +7,22 @@
             <li class="header">MAIN NAVIGATION</li>
             <li>
                 <a href="/OverView">
-                    <i class="fa fa-th"></i> <span>OverView</span>
+                    <i class="fa fa-home"></i> <span>Overview</span>
                 </a>
             </li>
             <li>
                 <a href="/kyc">
-                    <i class="fa fa-th"></i> <span>KYC/AML</span>
+                    <i class="fa fa-check"></i> <span>KYC/AML</span>
                 </a>
             </li>
             <li>
                 <a href="/order">
-                    <i class="fa fa-th"></i> <span>Order</span>
+                    <i class="fa fa-shopping-cart"></i> <span>Order</span>
                 </a>
             </li>
             <li>
                 <a href="/settings">
-                    <i class="fa fa-th"></i> <span>Settings</span>
+                    <i class="fa fa-cog"></i> <span>Settings</span>
                 </a>
             </li>
 

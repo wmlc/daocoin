@@ -20,9 +20,8 @@
                         <p>Order</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-bag"></i>
+                        <i class="ion ion-ios-cart"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -37,7 +36,6 @@
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -50,9 +48,8 @@
                         <p>DCP Amount</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-person-add"></i>
+                        <i class="ion ion-ios-analytics"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -65,9 +62,8 @@
                         <p>AML Check</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-pie-graph"></i>
+                        <i class="ion ion-checkmark-round"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -75,16 +71,16 @@
 
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">You can conver Flat to Token to Flat real time</h3>
+                <h3 class="box-title">You can conver Fiat to Token to Fiat real time</h3>
             </div>
             <div class="box-body">
                 <!-- Split button -->
                 <div class="margin">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-default">Redeem Token to Flat</button>
+                        <button type="button" class="btn btn-default">Redeem Token to Fiat</button>
                     </div>
                     <div class="btn-group">
-                        <button type="button" class="btn btn-info">Convert Flat to Token</button>
+                        <button type="button" class="btn btn-info">Convert Fiat to Token</button>
                     </div>
                     <div class="btn-group">
                         <button type="button" class="btn btn-success">Trade Token in Exchange</button>

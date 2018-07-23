@@ -140,9 +140,9 @@
                         <li class="nav-item">
                             <a href="/home" class="nav-link u-header__nav-link">
                                 @if(!isset(Auth::user()->name))
-                                    Login
+                                    login
                                 @else
-                                    {{ Auth::user()->name }}
+                                    control panel
                                 @endif
                             </a>
                         </li>
