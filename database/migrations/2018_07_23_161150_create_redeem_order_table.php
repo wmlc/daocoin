@@ -16,7 +16,7 @@ class CreateRedeemOrderTable extends Migration
         Schema::create('redeem_order', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-
+            $table->integer('uid')->comment('用户id');
             $table->string('redeem_id', '64')->default('')->comment('订单号');
             $table->string('redeem_status', 10)->default('no')->comment('订单是否完成 yes|no');
             $table->string('redeem_currency', 10)->comment('订单货币');

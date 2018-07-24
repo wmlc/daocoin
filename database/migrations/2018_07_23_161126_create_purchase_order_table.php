@@ -16,6 +16,7 @@ class CreatePurchaseOrderTable extends Migration
         Schema::create('purchase_order', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->integer('uid')->comment('用户id');
             $table->string('order_id', '64')->default('')->comment('订单号');
             $table->string('order_status', 10)->default('no')->comment('订单是否完成 yes|no');
             $table->string('order_currency', 10)->comment('订单货币');
