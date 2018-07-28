@@ -61,23 +61,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="captcha" class="col-md-4 control-label text-md-right">captcha</label>
-                            <div class="form-group">
-                                <div class="col-md-6">
-                                    <input id="captcha"  class="form-control" type="captcha" name="captcha" value="{{ old('captcha')  }}" required>
-                                    @if($errors->has('captcha'))
-                                        <div class="col-md-12">
-                                            <p class="text-danger text-left"><strong>{{$errors->first('captcha')}}</strong></p>
-                                        </div>
-                                    @endif
-                                </div>
-                                <div class="col-md-4">
-                                    <img src="{{captcha_src()}}" style="cursor: pointer" onclick="this.src='{{captcha_src()}}'+Math.random()">
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
