@@ -113,6 +113,7 @@
             result = JSON.parse(result);
             if(result.code == 200){
                 $("#VerificationCodeToken").val(result.data);
+                alert('send success');
             } else {
                 alert(result.data);
             }
