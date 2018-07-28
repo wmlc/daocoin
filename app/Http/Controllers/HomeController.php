@@ -23,6 +23,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+        # 查询订单数
+
+        # 查询用户信息 钱数  积分数
+
+
+        #  查询是否kyc验证
+
         return view('home');
     }
 
