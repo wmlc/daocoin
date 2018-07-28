@@ -28,6 +28,8 @@ class CreateKycInfoTable extends Migration
             $table->string('address', '150')->default('')->comment('居住地址');
             $table->string('certificate', '255')->default('')->comment('证件照片');
             $table->string('proof_address', '255')->default('')->comment('地址证明照片');
+            $table->string('is_pass', '10')->default('no')->comment('是否通过认证，yes|no');
+            $table->unique('uid');
         });
         DB::statement("ALTER TABLE `kyc_info` comment 'kyc验证信息表'");
     }
