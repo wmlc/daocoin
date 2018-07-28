@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Helpers\FuntionHelper;
 use App\Http\Repositories\EmailCodeRepository;
+use App\Jobs\SendEmail;
 use Illuminate\Http\Request;
 
 class EmailController extends Controller
@@ -34,7 +35,9 @@ class EmailController extends Controller
                 'is_use' => 'no',
             ];
             if($EmailCodeRepository->saveEmailCodeLog($data)){
-                
+                dispatch(new SendEmail($data));
+                exit(json_encode(['code' => 200, 'data' => $data['token']]));
+
             }
             exit(json_encode(['code' => 400, 'data' => 'email send error']));
         }

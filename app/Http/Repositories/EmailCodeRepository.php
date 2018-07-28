@@ -16,4 +16,8 @@ class EmailCodeRepository
         return $EmailCode->id;
     }
 
+    public function getEmailCodeByToken($token){
+        return EmailCode::query()->where(['token' => $token])->first(['created_at', 'code', 'is_use', 'email']);
+    }
+
 }

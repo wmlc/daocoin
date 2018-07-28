@@ -25,7 +25,6 @@
                             </div>
                         </div>
 
-                        <input id="VerificationCodeToken" type="text" class="form-control" name="VerificationCodeToken" value="" required style="display: none">
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
@@ -43,7 +42,8 @@
                             <label for="VerificationCode" class="col-md-4 col-form-label text-md-right">VerificationCode</label>
 
                             <div class="col-md-6">
-                                <input id="VerificationCode" type="text" class="form-control{{ $errors->has('VerificationCode') ? ' is-invalid' : '' }}" name="email" value="{{ old('VerificationCode') }}" required>
+                                <input id="VerificationCodeToken" type="text" class="form-control" title="" name="VerificationCodeToken" value="" required style="display: none">
+                                <input id="VerificationCode" type="text" class="form-control{{ $errors->has('VerificationCode') ? ' is-invalid' : '' }}" name="VerificationCode"  required>
 
                                 @if ($errors->has('VerificationCode'))
                                     <span class="invalid-feedback" role="alert">
