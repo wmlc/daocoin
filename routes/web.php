@@ -19,6 +19,7 @@ Route::get('/OverView', 'OverViewController@index');
 Route::get('/kyc', 'KycController@index');
 Route::get('/order', 'OrderController@index');
 Route::get('/settings', 'SettingsController@index');
+Route::post('sendEmailCode', 'EmailController@sendEmailCode');
 
 
 

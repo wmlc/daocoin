@@ -25,15 +25,29 @@
                             </div>
                         </div>
 
+                        <input id="VerificationCodeToken" type="text" class="form-control" name="VerificationCodeToken" value="" required style="display: none">
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
-
+                                <input type="button" value="send" onclick="sendVerificationCode()">
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="VerificationCode" class="col-md-4 col-form-label text-md-right">VerificationCode</label>
+
+                            <div class="col-md-6">
+                                <input id="VerificationCode" type="text" class="form-control{{ $errors->has('VerificationCode') ? ' is-invalid' : '' }}" name="email" value="{{ old('VerificationCode') }}" required>
+
+                                @if ($errors->has('VerificationCode'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('VerificationCode') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -75,3 +89,35 @@
     </div>
 </div>
 @endsection
+
+<script src="{{ asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
+<script>
+    function sendVerificationCode() {
+        var email = $("#email").val();
+        if(email == ''){
+            alert("Please enter your mailbox");
+            return;
+        }else {
+            var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+            isok= reg.test(email );
+            if (!isok) {
+                alert("The mailbox format is incorrect, please retype！");
+                return false;
+            }
+        }
+        var data = {
+            email: email
+        };
+        $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+        $.post("/sendEmailCode",data,function(result){
+            result = JSON.parse(result);
+            if(result.code == 200){
+                $("#VerificationCodeToken").val(result.data);
+            } else {
+                alert(result.data);
+            }
+        });
+        return false;
+
+    }
+</script>
