@@ -15,7 +15,7 @@
                 <!-- small box -->
                 <div class="small-box bg-aqua">
                     <div class="inner">
-                        <h3>150</h3>
+                        <h3>0</h3>
 
                         <p>Order</p>
                     </div>
@@ -29,7 +29,7 @@
                 <!-- small box -->
                 <div class="small-box bg-green">
                     <div class="inner">
-                        <h3>53</h3>
+                        <h3>0</h3>
 
                         <p>Total Amount($US)</p>
                     </div>
@@ -43,7 +43,7 @@
                 <!-- small box -->
                 <div class="small-box bg-yellow">
                     <div class="inner">
-                        <h3>44</h3>
+                        <h3>0</h3>
 
                         <p>DCP Amount</p>
                     </div>
