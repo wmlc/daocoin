@@ -92,3 +92,11 @@ composer install --optimize-autoloader
 ```angularjs
 php artisan route:cache
 ```
+
+
+## 命令创建
+```angular2html
+php artisan make:command SendEmails
+
+php artisan make:command Merge/RedisVideo2Sql
+```
