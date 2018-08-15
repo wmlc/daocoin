@@ -26,6 +26,8 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        # token 获取
+        $schedule->command('Crawle:GetToken')->hourly();
     }
 
     /**
