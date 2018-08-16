@@ -9,9 +9,10 @@ class PrimetrustTokenRepository
         $res = PrimetrustToken::query()->find(1);
         if(empty($res)){
             $res = new PrimetrustToken();
+            $res->id = 1;
         }
         $res->token = $token;
-        $res->expiry = date('Y-m-d H:i:s', strtotime('+2 hour'));
+        $res->expiry = date('Y-m-d H:i:s', strtotime('+2 week'));
         $res->save();
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Http\Repositories\KycRepository;
 use App\Http\Repositories\PrimetrustTokenRepository;
 use Illuminate\Console\Command;
 
@@ -36,9 +37,11 @@ class CronTest extends Command
      *
      * @return mixed
      */
-    public function handle(PrimetrustTokenRepository $PrimetrustTokenRepository)
+    public function handle(PrimetrustTokenRepository $PrimetrustTokenRepository,
+                           KycRepository $KycRepository)
     {
         //
-        echo $PrimetrustTokenRepository->getToken();
+        $KycRepository->auth();
+        #echo $PrimetrustTokenRepository->getToken();
     }
 }

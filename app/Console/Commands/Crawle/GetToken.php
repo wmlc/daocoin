@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands\Crawle;
 
+use App\Http\Constants\Config;
 use App\Http\Helpers\CurlHelper;
 use App\Http\Repositories\PrimetrustTokenRepository;
 use Illuminate\Console\Command;
@@ -20,7 +21,7 @@ class GetToken extends Command
      *
      * @var string
      */
-    protected $description = '认证token获取获取脚本';
+    protected $description = '认证token获取获取脚本,token两周过期';
 
     /**
      * Create a new command instance.
@@ -41,13 +42,12 @@ class GetToken extends Command
     public function handle(PrimetrustTokenRepository $PrimetrustTokenRepository)
     {
         //
-        $api = 'http://13.229.70.159/auth/jwts';
+        $api = Config::$API . '/auth/jwts';
         $data = [
-            'email' => '1290800466@qq.com',
-            'password' => '111111',
+            'email' => 'shuaili@daollargroup.com',
+            'password' => 'Daollar~！@123',
         ];
         $res = CurlHelper::http($api, 'POST', $data);
-        #$res = '{"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRoX2lkIjoiM2E5NjA3OWEtYjUyZS00MDE4LTgxZmItNGFiZTY2YTdkOWYzIiwiZXhwIjoxNTMzODg4MzE5fQ.LuASKCRgpnDSx_Ozks6fmND5Cd0N8edE2EZRcdtGSc8"}';
         $res = json_decode($res, true);
         if(!empty($res['token'])){
             $PrimetrustTokenRepository->saveToken($res['token']);
