@@ -21,13 +21,12 @@ class KycRepository
             'token' => $PrimetrustTokenRepository->getToken(),
         ];
         $res = CurlHelper::http($api, 'POST', $data, $header);
-        $res = json_decode($res);
+        $res = json_decode($res, true);
         var_dump($res);
-        if($res['data']){
+        if(isset($res['data']) && $res['data']['attributes']['aml-cleared']){
             return true;
         }
         return false;
-
     }
 
     /**
@@ -39,18 +38,18 @@ class KycRepository
     public function saveKycInfo($uid, $data)
     {
         $authData = [
-            'account-id' => 123,
-            'type' => 123,
-            'date_of_birth' => '',
-            'email' => '',
-            'sex' => '',
-            'type_address' => '',
-            'street_1' => '',
-            'city' => '',
-            'region' => '',
-            'postal_code' => '',
-            'country' => '',
-            'primary-phone-number' => '',
+            'account-id' => '1fb2fb18-7624-44fc-a8a9-16f211dd2309',
+            'type' => 'natural_person',
+            'date_of_birth' => '1992-12-12',
+            'email' => '1290800466@qq.com',
+            'sex' => 'male',
+            'type_address' => 'home',
+            'street_1' => '1234 Example Rd',
+            'city' => 'Las Vegas',
+            'region' => 'NV',
+            'postal_code' => '89123',
+            'country' => 'CN',
+            'primary-phone-number' => '2 (624) 445-1212',
         ];
         if($this->auth($authData)){
             # 查询用户状态，不存在入库；存在未通过认证，更新；已存在且通过认证不操作
@@ -116,5 +115,6 @@ class KycRepository
         }
         return true;
     }
+
 
 }

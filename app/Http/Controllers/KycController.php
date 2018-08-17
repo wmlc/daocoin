@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class KycController extends Controller
@@ -25,6 +26,12 @@ class KycController extends Controller
     {
         $id = Auth::id();
         return view('kyc');
+    }
+
+    public function save(Request $Request){
+        var_dump($Request->all());
+        exit;
+
     }
 
 }

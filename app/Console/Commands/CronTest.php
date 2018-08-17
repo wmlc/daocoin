@@ -41,7 +41,23 @@ class CronTest extends Command
                            KycRepository $KycRepository)
     {
         //
-        $KycRepository->auth();
-        #echo $PrimetrustTokenRepository->getToken();
+        $authData = [
+            'account-id' => '1fb2fb18-7624-44fc-a8a9-16f211dd2309',  # '1fb2fb18-7624-44fc-a8a9-16f211dd2309'
+            'type' => 'natural_person',
+            'name' => 'wangmaolin',
+            'tax-id-number' => '435345467',
+            'date_of_birth' => '1992-12-12',
+            'email' => '1290800466@qq.com',
+            'sex' => 'male',
+            'type_address' => 'home',
+            'street_1' => '1234 Example Rd',
+            'city' => 'Las Vegas',
+            'region' => 'NV',
+            'postal_code' => '89123',
+            'country' => 'CN',
+            'primary-phone-number' => '2 (624) 445-1212',
+        ];
+        $KycRepository->auth($authData);
+        #echo $PrimetrustTokenRepository->getBalance();
     }
 }
