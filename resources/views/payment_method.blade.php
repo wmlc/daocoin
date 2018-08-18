@@ -1,42 +1,5 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | General Form Elements</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="../../public/bower_components/bootstrap/dist/css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../public/bower_components/font-awesome/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="../../public/bower_components/Ionicons/css/ionicons.min.css">
-  <!-- Select2 -->
-  <link rel="stylesheet" href="../../public/bower_components/select2/dist/css/select2.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../../public/dist/css/AdminLTE.min.css">
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="../../public/dist/css/skins/_all-skins.min.css">
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
-  <!-- Google Font -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-</head>
-
-<body class="hold-transition skin-blue sidebar-mini">
-  <div class="wrapper">
-
-
-
+@include('layouts.header')
+@include('layouts.left')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
@@ -65,7 +28,7 @@
                   <p>Currently, the platform only supports the offline <strong>wire transfer</strong> method.</p>
                   <p>The information below will be necessary for a wire transfer into Gemini. To proceed:</p>
                   <p>1. Contact your bank and initiate a same-day wire transfer of <strong>$1,000.00</strong> from your  account to "Gemini Trust Company LLC". If you initiate anything other than a same-day wire transfer, it will be rejected on our end.</p>     
-                  <p>2. You <strong>MUST</strong> write <strong>VAYBJM</strong> in the "memo" or "instructions" field of the wire transfer in order for funds to reach  Gemini account.</p> 
+                  <p>2. You <strong>MUST</strong> write <strong>{{$mem_code}}</strong> in the "memo" or "instructions" field of the wire transfer in order for funds to reach  Gemini account.</p>
                   <div class="row">
                       <div class="col-md-4 col-sm-6 col-xs-6 text-right">
                           <p><strong>ABA routing number:</strong></p>
@@ -111,7 +74,7 @@
                   
                   
                   <div>
-                    <p><strong>IMPORTANT: </strong>You <strong>MUST</strong> write <strong>VAYBJM</strong> in the "memo" or "instructions" field of the wire transfer in order for funds to reach your Gemini account.</p>
+                    <p><strong>IMPORTANT: </strong>You <strong>MUST</strong> write <strong>{{$mem_code}}</strong> in the "memo" or "instructions" field of the wire transfer in order for funds to reach your Gemini account.</p>
                     <p>This information has also been sent to 675351292@qq.com</p>      
                   </div> 
                   <div style="color:#dd4b39; padding:30px 0;">
@@ -125,7 +88,7 @@
 
 
               <div class="box-footer" style="padding:20px 20px 30px;">
-                <button style="padding:10px 40px;" type="submit" class="btn btn-primary">Submit</button>
+                  <a href="/confirmbuy"><button style="padding:10px 40px;" type="submit" class="btn btn-primary">Submit</button></a>
               </div>
               
             </div>
@@ -142,21 +105,7 @@
 
 
   </div>
-  <!-- ./wrapper -->
-
-  <!-- jQuery 3 -->
-  <script src="../../public/bower_components/jquery/dist/jquery.min.js"></script>
-  <!-- Bootstrap 3.3.7 -->
-  <script src="../../public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <!-- FastClick -->
-  <script src="../../public/bower_components/fastclick/lib/fastclick.js"></script>
-  <!-- AdminLTE App -->
-  <script src="../../public/dist/js/adminlte.min.js"></script>
-
-  <!-- Select2 -->
   <script src="../../public/bower_components/select2/dist/js/select2.full.min.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="../../public/dist/js/demo.js"></script>
 
   <script>
     $(function () {
@@ -164,6 +113,4 @@
       $('.select2').select2()
     })
   </script>
-</body>
-
-</html>
+@include('layouts.footer')

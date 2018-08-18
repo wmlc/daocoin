@@ -27,26 +27,29 @@ class PurchaseController extends Controller
         $uid = Auth::id();
         # 检查用户是否通过aml验证
         $isKyc = $KycRepository->isKyc($uid);
-        if(!$isKyc){
-            return view('checking_kyc');
-        }
+//        if(!$isKyc){
+//            return view('checking_kyc');
+//        }
         # 获取用户钱包地址：
         $walletAddress = $UserRepository->getUserWalletAddress($uid);
-        return view('contributions', ['walletAddress' => $walletAddress]);
+        return view('application_coin', ['walletAddress' => $walletAddress]);
     }
 
     public function doBuy(Request $Request,
-                          PurchaseRepository $PurchaseRepository){
+                          PurchaseRepository $PurchaseRepository,
+                          UserRepository $UserRepository){
 
         $validatedData = $Request->validate([
             'walletAddress' => ['required', new EthAddress],
             'amount' => 'required|numeric',
         ]);
+        # 更新用户绑定钱包地址
+        $UserRepository->saveUserWalletAddress(Auth::id(), strtolower($validatedData['walletAddress']));
 
         $orderInfo = [
             'uid' => Auth::id(),
             'order_id' => date('YmdHis') . Auth::id() . FuntionHelper::randStr(10),
-            'memo_code' => '',
+            'mem_code' => '',
             'order_status' => 'start',
             'order_currency' => 'USDD',
             'order_amount' => $validatedData['amount'],
@@ -74,12 +77,16 @@ class PurchaseController extends Controller
                     'mem_code' => $data['attributes']['reference-number'],
                 ];
                 if($PurchaseRepository->updateOrder($orderId, $orderInfo)){
-                    return view('docontributions', ['memo_code' => $orderInfo['mem_code']]);
+                    return view('payment_method', ['mem_code' => $orderInfo['mem_code']]);
                 }
                 return view('error', ['message' => 'Mint failure.']);
             }
         }
         return view('error', ['message' => 'The order preservation failed.']);
+    }
+
+    public function confirmBuy(){
+        return view('check_wating');
     }
 
 }
