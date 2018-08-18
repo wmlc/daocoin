@@ -14,7 +14,7 @@
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <!-- form start -->
-                    <form role="form" action="/kyc/save" method="post">
+                    <form role="form" action="/kyc/save" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="box-body">
                             <div class="form-group">
@@ -135,19 +135,19 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputFile">Certificate</label>
-                                <input type="file" name="img_1" id="exampleInputFile">
+                                <input type="file" name="id_img">
 
                                 <p class="help-block">Please upload a high resolution picture of the front of passport
                                                       The file can be in PDF, JPEG(.jpg) and PNG(.png) format and cannot exceed 2M
                                 </p>
 
-                                <input type="file" name="img_2" id="exampleInputFile">
+                                <input type="file" name="id_back_img">
 
                                 <p class="help-block">Please upload a high resolution picture of the front of passport
                                                       The file can be in PDF, JPEG(.jpg) and PNG(.png) format and cannot exceed 2M
                                 </p>
 n
-                                <input type="file" name="img_3" id="exampleInputFile">
+                                <input type="file" name="id_person_img">
 
                                 <p class="help-block">Please upload a high resolution picture of the front of passport
                                                       The file can be in PDF, JPEG(.jpg) and PNG(.png) format and cannot exceed 2M
