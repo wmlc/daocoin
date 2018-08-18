@@ -21,9 +21,15 @@ class KycController extends Controller
      * Show the application dashboard.
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(KycRepository $KycRepository)
     {
-        $id = Auth::id();
+        $uid = Auth::id();
+        $kycInfo = $KycRepository->getKycInfo($uid);
+        if(!empty($kycInfo) && $kycInfo['is_pass'] == 'yes'){
+            return view('kycSuccess');
+        } else {
+
+        }
         return view('kyc');
     }
 

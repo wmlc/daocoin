@@ -2,9 +2,9 @@
 @include('layouts.left')
 
 <!-- bootstrap datepicker -->
-  <link rel="stylesheet" href="../../public/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+  <link rel="stylesheet" href="/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 <!-- Bootstrap Color Picker -->
-  <link rel="stylesheet" href="../../public/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
+  <link rel="stylesheet" href="/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -190,14 +190,14 @@ n
         <!-- /.row -->
     </section>
 </div>
-
+@include('layouts.footer')
 
 <!-- bootstrap datepicker -->
-<script src="../../public/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
 <!-- bootstrap color picker -->
-<script src="../../public/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+<script src="/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
 <!-- bootstrap time picker -->
-<script src="../../public/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+<script src="/plugins/timepicker/bootstrap-timepicker.min.js"></script>
 <script>
     //Date picker
     $('#datepicker').datepicker({
@@ -214,4 +214,4 @@ n
 
 </script>
 
-@include('layouts.footer')
+
