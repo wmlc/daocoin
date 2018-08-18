@@ -47,7 +47,7 @@ class PurchaseController extends Controller
             'uid' => Auth::id(),
             'order_id' => date('YmdHis') . Auth::id() . FuntionHelper::randStr(10),
             'memo_code' => '',
-            'order_status' => 'noPay',
+            'order_status' => 'start',
             'order_currency' => 'USDD',
             'order_amount' => $validatedData['amount'],
             'token_name' => 'USDD',
@@ -57,6 +57,7 @@ class PurchaseController extends Controller
             'purchase_rate' => '',
             'dcp_in_return' => '',
             'purchase_method' => '',
+            'primetrust_order_id' => '',
         ];
         # 保存订单信息
         $orderId = $PurchaseRepository->saveOrder($orderInfo);
@@ -69,16 +70,16 @@ class PurchaseController extends Controller
                 # 更新订单状态
                 $orderInfo = [
                     'primetrust_order_id' => $data['id'],
-                    'order_status'
+                    'order_status' => $PurchaseRepository->getOrderStatusByContributionsStatus($data['attributes']['status']),
+                    'mem_code' => $data['attributes']['reference-number'],
                 ];
+                if($PurchaseRepository->updateOrder($orderId, $orderInfo)){
+                    return view('docontributions', ['memo_code' => $orderInfo['mem_code']]);
+                }
+                return view('error', ['message' => 'Mint failure.']);
             }
         }
         return view('error', ['message' => 'The order preservation failed.']);
-
-
-
-
-
     }
 
 }

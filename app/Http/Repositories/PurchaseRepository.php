@@ -51,7 +51,36 @@ class PurchaseRepository
         $orderModel->purchase_rate = $orderInfo['purchase_rate'];
         $orderModel->dcp_in_return = $orderInfo['dcp_in_return'];
         $orderModel->purchase_method = $orderInfo['purchase_method'];
+        $orderModel->primetrust_order_id = $orderInfo['primetrust_order_id'];
         $orderModel->save();
         return $orderModel->id;
+    }
+
+    public function updateOrder($orderId, $orderInfo){
+        $orderModel = Order::query()->find($orderId);
+        $orderModel->primetrust_order_id = $orderInfo['primetrust_order_id'];
+        $orderModel->order_status = $orderInfo['order_status'];
+        $orderModel->mem_code = $orderInfo['mem_code'];
+        return $orderModel->save();
+    }
+
+    public function getOrderStatusByContributionsStatus($status){
+        switch ($status){
+            case 'pending':
+                $orderStatus = 'noPay';
+                break;
+            case 'authorized':
+                $orderStatus = 'alreadyPaid';
+                break;
+            case 'settled':
+                $orderStatus = 'alreadyPaid';
+                break;
+            case 'cancelled':
+                $orderStatus = 'nvalid';
+                break;
+            default:
+                $orderStatus = $status;
+        }
+        return $orderStatus;
     }
 }
