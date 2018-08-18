@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddStatusToUsersTable extends Migration
+class AddWalletAddressToUserProfileTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class AddStatusToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('user_profile', function (Blueprint $table) {
             //
-            $table->string('is_partner', 10)->default('no')->comment('是否是合伙人 yes|no');
+            $table->string('wallet_address', 255)->comment('eth钱包地址');
         });
     }
 
@@ -26,9 +26,9 @@ class AddStatusToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('user_profile', function (Blueprint $table) {
             //
-            $table->dropColumn('is_partner');
+            $table->dropColumn('wallet_address');
         });
     }
 }
