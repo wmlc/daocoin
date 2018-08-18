@@ -16,7 +16,8 @@
 	height: 100%;
 }
 .preview1,
-.preview2{
+.preview2,
+.preview3{
 	position: absolute;
 	/*z-index: -1;*/
 	top: 0;
@@ -24,10 +25,13 @@
 	width: 100%;
 	height: 100%;
 }
-.doc1,.doc2{
+.doc1,.doc2,.doc3{
 	opacity: 0;
 	position: absolute;
 	top: 0;
 	left: 0;
 	cursor: pointer;
+}
+.display-none{
+	display: none;
 }

@@ -1,4 +1,5 @@
 @include('layouts.header')
+<link rel="stylesheet" href="/assets/vendor/upload/upload.css">
 @include('layouts.left')
 
 <!-- bootstrap datepicker -->
@@ -174,26 +175,76 @@
                                 <label for="">Residential address</label>
                                 <input type="text" value="{{isset($kycInfo['address']) ? $kycInfo['address'] : ''}}" name="residential_address" class="form-control" id="" placeholder="Residential address">
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInputFile">Certificate</label>
-                                <input type="file" name="id_img">
 
-                                <p class="help-block">Please upload a high resolution picture of the front of passport
-                                                      The file can be in PDF, JPEG(.jpg) and PNG(.png) format and cannot exceed 2M
-                                </p>
 
-                                <input type="file" name="id_back_img">
 
-                                <p class="help-block">Please upload a high resolution picture of the front of passport
-                                                      The file can be in PDF, JPEG(.jpg) and PNG(.png) format and cannot exceed 2M
-                                </p>
-n
-                                <input type="file" name="id_person_img">
-
-                                <p class="help-block">Please upload a high resolution picture of the front of passport
-                                                      The file can be in PDF, JPEG(.jpg) and PNG(.png) format and cannot exceed 2M
-                                </p>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="essential-bg">
+                                        <div>
+                                            <img class="uploadImg" src="/assets/img/upload.png" />
+                                            <img class="preview1 display-none" src="{$image}" >
+                                            <input class="doc1" type="file"  name="id_img" value="{$image}" onchange="javascript:setImagePreview('doc1','preview1','.essential-bg div');$('.preview1').show()"/>
+                                        </div>
+                                    </div>
+                                    <div class="essential-text mt-2">
+                                        * you can choose to upload the front of your Passport  or National ID Document.
+                                        </br>
+                                        * The file can be in PDF, JPEG(.jpg) and PNG(.png) format and cannot exceed 2M
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="essential-bg">
+                                        <div>
+                                            <img class="uploadImg" src="/assets/img/upload.png" />
+                                            <img class="preview2 display-none" src="{$image}" >
+                                            <input class="doc2" type="file"  name="id_back_img" value="{$image}" onchange="javascript:setImagePreview('doc2','preview2','.essential-bg div');$('.preview2').show()"/>
+                                        </div>
+                                    </div>
+                                    <div class="essential-text mt-2">
+                                        * you can choose to upload the back of your Passport or National ID Document.
+                                        </br>
+                                        * The file can be in PDF, JPEG(.jpg) and PNG(.png) format and cannot exceed 2M
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="essential-bg">
+                                        <div>
+                                            <img class="uploadImg" src="/assets/img/upload.png" />
+                                            <img class="preview3 display-none" src="{$image}" >
+                                            <input class="doc3" type="file"  name="id_person_img" value="{$image}" onchange="javascript:setImagePreview('doc3','preview3','.essential-bg div');$('.preview3').show()"/>
+                                        </div>
+                                    </div>
+                                    <div class="essential-text mt-2">
+                                        * Please provide a photo of you holding your IDocument Card ,together with a Note. In the same picture, make a reference to DaoCoin and today's date displayed.
+                                        </br>
+                                        * The file can be in PDF, JPEG(.jpg) and PNG(.png) format and cannot exceed 2M
+                                    </div>
+                                </div>
                             </div>
+
+
+
+                            {{--<div class="form-group">--}}
+                                {{--<label for="exampleInputFile">Certificate</label>--}}
+                                {{--<input type="file" name="id_img">--}}
+
+                                {{--<p class="help-block">Please upload a high resolution picture of the front of passport--}}
+                                                      {{--The file can be in PDF, JPEG(.jpg) and PNG(.png) format and cannot exceed 2M--}}
+                                {{--</p>--}}
+
+                                {{--<input type="file" name="id_back_img">--}}
+
+                                {{--<p class="help-block">Please upload a high resolution picture of the front of passport--}}
+                                                      {{--The file can be in PDF, JPEG(.jpg) and PNG(.png) format and cannot exceed 2M--}}
+                                {{--</p>--}}
+{{--n--}}
+                                {{--<input type="file" name="id_person_img">--}}
+
+                                {{--<p class="help-block">Please upload a high resolution picture of the front of passport--}}
+                                                      {{--The file can be in PDF, JPEG(.jpg) and PNG(.png) format and cannot exceed 2M--}}
+                                {{--</p>--}}
+                            {{--</div>--}}
 
                         </div>
                         <!-- /.box-body -->
@@ -217,6 +268,7 @@ n
 <script src="/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js"></script>
 <!-- bootstrap time picker -->
 <script src="/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+<script src="/assets/vendor/upload/upload.js"></script>
 <script>
     //Date picker
     $('#datepicker').datepicker({
