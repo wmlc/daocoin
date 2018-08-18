@@ -37,38 +37,6 @@ class KycRepository
      */
     public function saveKycInfo($uid, $data)
     {
-//        `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-//  `created_at` timestamp NULL DEFAULT NULL,
-//  `updated_at` timestamp NULL DEFAULT NULL,
-//  `uid` int(11) NOT NULL COMMENT '用户id',
-//  `nationality` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '国家',
-//  `first_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'First name',
-//  `middle_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Middle name',
-//  `family_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'Family name',
-//  `birth` date NOT NULL COMMENT '生日',
-//  `certificate_type` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '证件类型',
-//  `certificate_id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '证件号',
-//  `certificate_expiry_date` date NOT NULL COMMENT '证件有效期',
-//  `address` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '居住地址',
-//  `certificate` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '证件照片',
-//  `proof_address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '地址证明照片',
-//  `is_pass` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'no' COMMENT '是否通过认证，yes|no',
-
-
- //       'type' => 'required',
-//            'gender' => 'required',
-//            'email' => 'required',
-//            'phone' => 'required',
-//            'type_address' => 'required',
-//            'country' => 'required',
-//            'region' => 'required',
-//            'city' => 'required',
-//            'street' => 'required',
-//            'postalcode' => 'required',
-//            'id_img' => 'required|image',
-//            'id_back_img' => 'required|image',
-//            'id_person_img' => 'required|image',
-
         $authData = [
             'account-id' => Config::$ACCOUNT_ID,
             'type' => $data['type'],
@@ -88,37 +56,33 @@ class KycRepository
             $userKycInfo = Kyc::query()->where(['uid' => $uid])->first(['is_pass', 'id']);
             if(empty($userKycInfo)){
                 $model = new Kyc();
-                $model->nationality = $uid;
-                $model->first_name = $data['firstname'];
-                $model->middle_name = $data['middlename'];
-                $model->family_name = $data['familyname'];
-                $model->birth = $data['birth'];
-                $model->certificate_type = $data['certificate_type'];
-                $model->certificate_id = $data['id_number'];
-                $model->certificate_expiry_date = $data['id_expire_date'];
-                $model->address = $data['residential_address'];
-                $model->certificate = $uid;
-                $model->proof_address = $uid;
-                $model->is_pass = 'yes';
-                $model->uid = $uid;
-                $model->save();
             } elseif ($userKycInfo['is_pass'] != 'yes'){
                 $model = Kyc::query()->find($userKycInfo['id']);
-                $model->nationality = $uid;
-                $model->first_name = $uid;
-                $model->middle_name = $uid;
-                $model->family_name = $uid;
-                $model->birth = $uid;
-                $model->certificate_type = $uid;
-                $model->certificate_id = $uid;
-                $model->certificate_expiry_date = $uid;
-                $model->address = $uid;
-                $model->certificate = $uid;
-                $model->proof_address = $uid;
-                $model->is_pass = 'yes';
-                $model->uid = $uid;
-                $model->save();
             }
+            $model->first_name = $data['firstname'];
+            $model->middle_name = $data['middlename'];
+            $model->family_name = $data['familyname'];
+            $model->birth = $data['birth'];
+            $model->certificate_type = $data['certificate_type'];
+            $model->certificate_id = $data['id_number'];
+            $model->certificate_expiry_date = $data['id_expire_date'];
+            $model->address = $data['residential_address'];
+            $model->id_img = $data['id_img'];
+            $model->id_back_img = $data['id_back_img'];
+            $model->id_person_img = $data['id_person_img'];
+            $model->type = $data['type'];
+            $model->is_pass = 'yes';
+            $model->uid = $uid;
+            $model->gender = $data['gender'];
+            $model->email = $data['email'];
+            $model->phone = $data['phone'];
+            $model->type_address = $data['type_address'];
+            $model->country = $data['country'];
+            $model->region = $data['region'];
+            $model->city = $data['city'];
+            $model->street = $data['street'];
+            $model->postalcode = $data['postalcode'];
+            return $model->save();
         }
         return false;
     }
