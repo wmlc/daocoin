@@ -37,8 +37,33 @@ class KycRepository
      */
     public function saveKycInfo($uid, $data)
     {
+ //       'type' => 'required',
+//            'firstname' => 'required',
+//            'middlename' => 'required',
+//            'familyname' => 'required',
+//            'gender' => 'required',
+//            'birth' => 'required',
+//            'email' => 'required',
+//            'phone' => 'required',
+//            'type_address' => 'required',
+//            'country' => 'required',
+//            'region' => 'required',
+//            'city' => 'required',
+//            'street' => 'required',
+//            'postalcode' => 'required',
+//            'certificate_type' => 'required',
+//            'id_number' => 'required',
+//            'id_expire_date' => 'required',
+//            'residential_address' => 'required',
+//            'id_img' => 'required|image',
+//            'id_back_img' => 'required|image',
+//            'id_person_img' => 'required|image',
+
+
+
+
         $authData = [
-            'account-id' => '1fb2fb18-7624-44fc-a8a9-16f211dd2309',
+            'account-id' => Config::$ACCOUNT_ID,
             'type' => 'natural_person',
             'date_of_birth' => '1992-12-12',
             'email' => '1290800466@qq.com',

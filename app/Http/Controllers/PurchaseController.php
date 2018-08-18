@@ -27,9 +27,9 @@ class PurchaseController extends Controller
         $uid = Auth::id();
         # 检查用户是否通过aml验证
         $isKyc = $KycRepository->isKyc($uid);
-//        if(!$isKyc){
-//            return view('checking_kyc');
-//        }
+        if(!$isKyc){
+            return view('checking_kyc');
+        }
         # 获取用户钱包地址：
         $walletAddress = $UserRepository->getUserWalletAddress($uid);
         return view('application_coin', ['walletAddress' => $walletAddress]);
