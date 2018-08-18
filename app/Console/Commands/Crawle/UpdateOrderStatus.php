@@ -3,8 +3,6 @@
 namespace App\Console\Commands\Crawle;
 
 use App\Http\Constants\Config;
-use App\Http\Helpers\CurlHelper;
-use App\Http\Repositories\PrimetrustTokenRepository;
 use App\Http\Repositories\PurchaseRepository;
 use Illuminate\Console\Command;
 

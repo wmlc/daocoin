@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Repositories\PurchaseRepository;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
@@ -21,10 +22,11 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(PurchaseRepository $PurchaseRepository)
     {
-        $id = Auth::id();
-        return view('order');
+        $uid = Auth::id();
+        $orderList = $PurchaseRepository->getOrderList($uid);
+        return view('order', ['orderList' => $orderList]);
     }
 
 }

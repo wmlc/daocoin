@@ -28,6 +28,7 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
         # token 获取
         $schedule->command('Crawle:GetToken')->hourly();
+        $schedule->command('Crawle:UpdateOrderStatus')->everyFiveMinutes();
     }
 
     /**
