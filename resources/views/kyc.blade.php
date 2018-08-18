@@ -27,38 +27,57 @@
                                 <label for="exampleInputEmail1">Type</label>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="type" id="optionsRadios_type1" value="natural_person" checked>
+                                        @if(isset($kycInfo['type']) && $kycInfo['type'] == 'natural_person')
+                                            <input type="radio" name="type" id="optionsRadios_type1" value="natural_person" checked>
+                                        @else
+                                            <input type="radio" name="type" id="optionsRadios_type1" value="natural_person">
+                                        @endif
                                         Natural_person
                                     </label>
                                     &nbsp;&nbsp;
                                     <label>
-                                        <input type="radio" name="type" id="optionsRadios_type2" value="Legal_person">
+                                        @if(isset($kycInfo['type']) && $kycInfo['type'] == 'legal_person')
+                                            <input type="radio" name="type" id="optionsRadios_type2" value="legal_person" checked>
+                                        @else
+                                            <input type="radio" name="type" id="optionsRadios_type2" value="legal_person">
+                                        @endif
+
                                         Legal_person
                                     </label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="">First name</label>
-                                <input type="text" name="firstname" class="form-control" id="" placeholder="First name">
+                                @if(isset($kycInfo['first_name']))
+                                    <input type="text" name="firstname" class="form-control" value="{{$kycInfo['first_name']}}" id="" placeholder="First name">
+                                @else
+                                    <input type="text" name="firstname" class="form-control" id="" placeholder="First name">
+                                @endif
+
                             </div>
                             <div class="form-group">
                                 <label for="">Middle name</label>
-                                <input type="text" name="middlename" class="form-control" id="" placeholder="Middle name">
+                                @if(isset($kycInfo['middle_name']))
+                                    <input type="text" name="middlename" value="{{$kycInfo['middle_name']}}" class="form-control" id="" placeholder="Middle name">
+                                @else
+                                    <input type="text" name="middlename" class="form-control" id="" placeholder="Middle name">
+                                @endif
+
                             </div>
                             <div class="form-group">
                                 <label for="">Family name</label>
-                                <input type="text" name="familyname" class="form-control" id="" placeholder="Family name">
+                                <input type="text" name="familyname"  value="{{isset($kycInfo['family_name']) ? $kycInfo['family_name'] : ''}}" class="form-control" id="" placeholder="Family name">
                             </div>
                             <div class="form-group">
                                 <label for="">Gender</label>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="gender" id="optionsRadios_gender1" value="Male" checked>
+                                        <input type="radio" name="gender" id="optionsRadios_gender1" value="Male" {{isset($kycInfo['gender']) && $kycInfo['gender'] == 'Male' ? 'checked' : ''}}>
                                         Male
                                     </label>
                                     &nbsp;&nbsp;
                                     <label>
-                                        <input type="radio" name="gender" id="optionsRadios_gender2" value="Female">
+                                        <input type="radio" name="gender" id="optionsRadios_gender2" value="Female" {{isset($kycInfo['gender']) && $kycInfo['gender'] == 'Female' ? 'checked' : ''}}>
                                         Female
                                     </label>
                                 </div>
@@ -71,7 +90,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input type="text" name="birth" class="form-control pull-right" id="datepicker" placeholder="Date of birth">
+                                    <input type="text" value="{{isset($kycInfo['birth']) ? $kycInfo['birth'] : ''}}" name="birth" class="form-control pull-right" id="datepicker" placeholder="Date of birth">
                                 </div>
 
                             </div>
@@ -79,63 +98,63 @@
 
                             <div class="form-group">
                                 <label for="">Email</label>
-                                <input type="email" name="email" class="form-control" id="" placeholder="Email">
+                                <input type="email" name="email"  value="{{isset($kycInfo['email']) ? $kycInfo['email'] : ''}}" class="form-control" id="" placeholder="Email">
                             </div>
                             <div class="form-group">
                                 <label for="">Primary-phone-number</label>
-                                <input type="text"  name="phone" class="form-control" id="" placeholder="Primary-phone-number">
+                                <input type="text" value="{{isset($kycInfo['phone']) ? $kycInfo['phone'] : ''}}"  name="phone" class="form-control" id="" placeholder="Primary-phone-number">
                             </div>
                             <div class="form-group">
                                 <label for="">Type_address</label>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="type_address" id="" value="home" checked>
+                                        <input type="radio" name="type_address" id="" value="home" {{isset($kycInfo['type_address']) && $kycInfo['type_address'] == 'home' ? 'checked' : ''}}>
                                         Home
                                     </label>
                                     &nbsp;&nbsp;
                                     <label>
-                                        <input type="radio" name="type_address" id="" value="company">
+                                        <input type="radio" name="type_address" id="" value="company" {{isset($kycInfo['type_address']) && $kycInfo['type_address'] == 'company' ? 'checked' : ''}}>
                                         Company
                                     </label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="">Country</label>
-                                <input type="text" name="country" class="form-control" id="" placeholder="Country">
+                                <input type="text" name="country" value="{{isset($kycInfo['country']) ? $kycInfo['country'] : ''}}" class="form-control" id="" placeholder="Country">
                             </div>
                             <div class="form-group">
                                 <label for="">Region</label>
-                                <input type="text" name="region" class="form-control" id="" placeholder="Region">
+                                <input type="text" name="region" value="{{isset($kycInfo['region']) ? $kycInfo['region'] : ''}}" class="form-control" id="" placeholder="Region">
                             </div>
                             <div class="form-group">
                                 <label for="">City</label>
-                                <input type="text" name="city" class="form-control" id="" placeholder="City">
+                                <input type="text" name="city" value="{{isset($kycInfo['city']) ? $kycInfo['city'] : ''}}" class="form-control" id="" placeholder="City">
                             </div>
                             <div class="form-group">
                                 <label for="">Street</label>
-                                <input type="text" name="street" class="form-control" id="" placeholder="Street">
+                                <input type="text" name="street" value="{{isset($kycInfo['street']) ? $kycInfo['street'] : ''}}" class="form-control" id="" placeholder="Street">
                             </div>
                             <div class="form-group">
                                 <label for="">Postal Code</label>
-                                <input type="text" name="postalcode"  class="form-control" id="" placeholder="Postal Code">
+                                <input type="text" name="postalcode" value="{{isset($kycInfo['postalcode']) ? $kycInfo['postalcode'] : ''}}"  class="form-control" id="" placeholder="Postal Code">
                             </div>
                             <div class="form-group">
                                 <label for="">Certificate type</label>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="certificate_type" id="" value="Valid Identity Card" checked>
+                                        <input type="radio" {{isset($kycInfo['certificate_type']) && $kycInfo['certificate_type'] == 'Valid Identity Card' ? 'checked' : ''}} name="certificate_type" id="" value="Valid Identity Card">
                                         Valid Identity Card
                                     </label>
                                     &nbsp;&nbsp;
                                     <label>
-                                        <input type="radio" name="certificate_type" id="" value="Passport">
+                                        <input type="radio" name="certificate_type" id="" value="Passport" {{isset($kycInfo['certificate_type']) && $kycInfo['certificate_type'] == 'Passport' ? 'checked' : ''}}>
                                         Passport
                                     </label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="">ID Number</label>
-                                <input type="text" name="id_number" class="form-control" id="" placeholder="ID Number">
+                                <input type="text" value="{{isset($kycInfo['certificate_id']) ? $kycInfo['certificate_id'] : ''}}" name="id_number" class="form-control" id="" placeholder="ID Number">
                             </div>
 
 
@@ -146,14 +165,14 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input type="text" name="id_expire_date" class="form-control pull-right" id="datepicker1" placeholder="ID Expiry date">
+                                    <input type="text" value="{{isset($kycInfo['certificate_expiry_date']) ? $kycInfo['certificate_expiry_date'] : ''}}" name="id_expire_date" class="form-control pull-right" id="datepicker1" placeholder="ID Expiry date">
                                 </div>
 
                             </div>
 
                             <div class="form-group">
                                 <label for="">Residential address</label>
-                                <input type="text" name="residential_address" class="form-control" id="" placeholder="Residential address">
+                                <input type="text" value="{{isset($kycInfo['address']) ? $kycInfo['address'] : ''}}" name="residential_address" class="form-control" id="" placeholder="Residential address">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputFile">Certificate</label>
@@ -195,7 +214,7 @@ n
 <!-- bootstrap datepicker -->
 <script src="/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
 <!-- bootstrap color picker -->
-<script src="/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+<script src="/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js"></script>
 <!-- bootstrap time picker -->
 <script src="/plugins/timepicker/bootstrap-timepicker.min.js"></script>
 <script>

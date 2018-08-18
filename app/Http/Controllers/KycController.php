@@ -27,10 +27,8 @@ class KycController extends Controller
         $kycInfo = $KycRepository->getKycInfo($uid);
         if(!empty($kycInfo) && $kycInfo['is_pass'] == 'yes'){
             return view('kycSuccess');
-        } else {
-
         }
-        return view('kyc');
+        return view('kyc', ['kycInfo' => $kycInfo]);
     }
 
     public function save(Request $Request, KycRepository $KycRepository)
