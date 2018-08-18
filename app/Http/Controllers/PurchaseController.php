@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Helpers\FuntionHelper;
 use App\Http\Repositories\KycRepository;
+use App\Http\Repositories\PurchaseRepository;
 use App\Http\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,18 +32,52 @@ class PurchaseController extends Controller
         }
         # 获取用户钱包地址：
         $walletAddress = $UserRepository->getUserWalletAddress($uid);
-        return view('checkKyc', ['walletAddress' => $walletAddress]);
+        return view('contributions', ['walletAddress' => $walletAddress]);
     }
 
-    public function doBuy(Request $Request){
+    public function doBuy(Request $Request,
+                          PurchaseRepository $PurchaseRepository){
 
         $validatedData = $Request->validate([
             'walletAddress' => ['required', new EthAddress],
             'amount' => 'required|numeric',
         ]);
 
-        var_dump($validatedData);
-        exit;
+        $orderInfo = [
+            'uid' => Auth::id(),
+            'order_id' => date('YmdHis') . Auth::id() . FuntionHelper::randStr(10),
+            'memo_code' => '',
+            'order_status' => 'noPay',
+            'order_currency' => 'USDD',
+            'order_amount' => $validatedData['amount'],
+            'token_name' => 'USDD',
+            'token_amount' => '',
+            'wallet_address' => $validatedData['walletAddress'],
+            'purchase_fee' => '',
+            'purchase_rate' => '',
+            'dcp_in_return' => '',
+            'purchase_method' => '',
+        ];
+        # 保存订单信息
+        $orderId = $PurchaseRepository->saveOrder($orderInfo);
+        if($orderId){
+            # 铸币订单发送
+            $data = $PurchaseRepository->contributions($validatedData['amount']);
+            if(empty($data)){
+                return view('error', ['message' => 'Mint failure.']);
+            } else {
+                # 更新订单状态
+                $orderInfo = [
+                    'primetrust_order_id' => $data['id'],
+                    'order_status'
+                ];
+            }
+        }
+        return view('error', ['message' => 'The order preservation failed.']);
+
+
+
+
 
     }
 

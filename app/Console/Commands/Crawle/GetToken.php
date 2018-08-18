@@ -44,8 +44,8 @@ class GetToken extends Command
         //
         $api = Config::$API . '/auth/jwts';
         $data = [
-            'email' => 'shuaili@daollargroup.com',
-            'password' => 'Daollar~！@123',
+            'email' => Config::$ACCOUNT_EMAIL,
+            'password' => Config::$ACCOUNT_PASSWD,
         ];
         $res = CurlHelper::http($api, 'POST', $data);
         $res = json_decode($res, true);

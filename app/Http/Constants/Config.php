@@ -13,4 +13,12 @@ class Config{
 
     public static $API= 'http://ec2-13-229-70-159.ap-southeast-1.compute.amazonaws.com:8081';
 
+    public static $ACCOUNT_ID = '1fb2fb18-7624-44fc-a8a9-16f211dd2309';
+
+    public static $ACCOUNT_EMAIL = 'shuaili@daollargroup.com';
+
+    public static $ACCOUNT_PASSWD = 'Daollar~！@123';
+
+    public static $ACCOUNT_NAME = 'USDD';
+
 }
