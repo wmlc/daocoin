@@ -21,4 +21,6 @@ class Config{
 
     public static $ACCOUNT_NAME = 'USDD';
 
+    public static $ORDER_EXPIRY = '129600';
+
 }

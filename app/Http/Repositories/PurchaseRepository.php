@@ -36,6 +36,23 @@ class PurchaseRepository
         return false;
     }
 
+    /**
+     * 查询订单铸币信息
+     */
+    public function getContributionsInFo($account_id){
+        $api = Config::$API . 'v2/getContributions?id=' . $account_id;
+        $PrimetrustTokenRepository = new PrimetrustTokenRepository();
+        $header = [
+            'token' => $PrimetrustTokenRepository->getToken(),
+        ];
+        $res = CurlHelper::http($api, 'GET', [], $header);
+        $res = json_decode($res, true);
+        if(!empty($res['attributes'])){
+            return $res['attributes'];
+        }
+        return false;
+    }
+
     public function saveOrder($orderInfo){
         $orderModel = new Order();
         $orderModel->uid = $orderInfo['uid'];
@@ -62,6 +79,21 @@ class PurchaseRepository
         $orderModel->order_status = $orderInfo['order_status'];
         $orderModel->mem_code = $orderInfo['mem_code'];
         return $orderModel->save();
+    }
+
+    public function updateOrderStatus($orderId, $orderStatus){
+        $orderModel = Order::query()->find($orderId);
+        $orderModel->order_status = $orderStatus;
+        return $orderModel->save();
+    }
+
+    public function getSearchOrderCount(){
+        return Order::query()->where(['order_status' => 'noPay'])->count();
+    }
+
+    public function getSearchOrderByPage($page, $pageCount){
+        $offset = bcmul(bcsub($page, '1', 0), $pageCount, 0);
+        return Order::query()->where(['order_status' => 'noPay'])->offset($offset)->limit($pageCount)->get()->toArray();
     }
 
     public function getOrderStatusByContributionsStatus($status){
