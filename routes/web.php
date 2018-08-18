@@ -22,6 +22,8 @@ Route::get('/settings', 'SettingsController@index');
 Route::post('sendEmailCode', 'EmailController@sendEmailCode');
 Route::post('/kyc/save', 'KycController@save');
 
+Route::any('/upload', 'FileController@upload');
+
 
 
 

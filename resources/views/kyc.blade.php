@@ -135,19 +135,19 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputFile">Certificate</label>
-                                <input type="file" id="exampleInputFile">
+                                <input type="file" name="img_1" id="exampleInputFile">
 
                                 <p class="help-block">Please upload a high resolution picture of the front of passport
                                                       The file can be in PDF, JPEG(.jpg) and PNG(.png) format and cannot exceed 2M
                                 </p>
 
-                                <input type="file" id="exampleInputFile">
+                                <input type="file" name="img_2" id="exampleInputFile">
 
                                 <p class="help-block">Please upload a high resolution picture of the front of passport
                                                       The file can be in PDF, JPEG(.jpg) and PNG(.png) format and cannot exceed 2M
                                 </p>
-
-                                <input type="file" id="exampleInputFile">
+n
+                                <input type="file" name="img_3" id="exampleInputFile">
 
                                 <p class="help-block">Please upload a high resolution picture of the front of passport
                                                       The file can be in PDF, JPEG(.jpg) and PNG(.png) format and cannot exceed 2M
