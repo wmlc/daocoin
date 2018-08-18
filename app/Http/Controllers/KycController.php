@@ -48,9 +48,9 @@ class KycController extends Controller
 //            'id_number' => 'required',
 //            'id_expire_date' => 'required',
 //            'residential_address' => 'required',
-//            'id_img' => 'required|image',
-//            'id_back_img' => 'required|image',
-//            'id_person_img' => 'required|image',
+            'id_img' => 'required|image',
+            'id_back_img' => 'required|image',
+            'id_person_img' => 'required|image',
         ]);
 
         $file = $Request->file('id_img');
