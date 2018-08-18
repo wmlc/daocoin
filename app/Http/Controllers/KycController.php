@@ -30,24 +30,24 @@ class KycController extends Controller
     public function save(Request $Request, KycRepository $KycRepository)
     {
         $validatedData = $Request->validate([
-//            'type' => 'required',
-//            'firstname' => 'required',
-//            'middlename' => 'required',
-//            'familyname' => 'required',
-//            'gender' => 'required',
-//            'birth' => 'required',
-//            'email' => 'required',
-//            'phone' => 'required',
-//            'type_address' => 'required',
-//            'country' => 'required',
-//            'region' => 'required',
-//            'city' => 'required',
-//            'street' => 'required',
-//            'postalcode' => 'required',
-//            'certificate_type' => 'required',
-//            'id_number' => 'required',
-//            'id_expire_date' => 'required',
-//            'residential_address' => 'required',
+            'type' => 'required',
+            'firstname' => 'required',
+            'middlename' => 'required',
+            'familyname' => 'required',
+            'gender' => 'required',
+            'birth' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'type_address' => 'required',
+            'country' => 'required',
+            'region' => 'required',
+            'city' => 'required',
+            'street' => 'required',
+            'postalcode' => 'required',
+            'certificate_type' => 'required',
+            'id_number' => 'required',
+            'id_expire_date' => 'required',
+            'residential_address' => 'required',
             'id_img' => 'required|image',
             'id_back_img' => 'required|image',
             'id_person_img' => 'required|image',
@@ -80,7 +80,7 @@ class KycController extends Controller
         if($KycRepository->saveKycInfo($uid, $validatedData)){
             return view('kycSuccess');
         }
-        return view('error');
+        return view('error', ['message' => 'KYC validation failed']);
     }
 
 }
