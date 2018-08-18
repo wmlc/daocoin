@@ -77,10 +77,10 @@
                 <!-- Split button -->
                 <div class="margin">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-default">Redeem Token to Fiat</button>
+                        <a href="/buy"><button type="button" class="btn btn-info">Convert Fiat to Token</button></a>
                     </div>
                     <div class="btn-group">
-                        <button type="button" class="btn btn-info">Convert Fiat to Token</button>
+                        <button type="button" class="btn btn-default">Redeem Token to Fiat</button>
                     </div>
                     <div class="btn-group">
                         <button type="button" class="btn btn-success">Trade Token in Exchange</button>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Repositories\KycRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -9,7 +10,6 @@ class KycController extends Controller
 {
     /**
      * Create a new controller instance.
-     *
      * @return void
      */
     public function __construct()
@@ -19,7 +19,6 @@ class KycController extends Controller
 
     /**
      * Show the application dashboard.
-     *
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -28,48 +27,60 @@ class KycController extends Controller
         return view('kyc');
     }
 
-    public function save(Request $Request){
+    public function save(Request $Request, KycRepository $KycRepository)
+    {
         $validatedData = $Request->validate([
-//            'type' => 'required',
-//            'firstname' => 'required',
-//            'middlename' => 'required',
-//            'familyname' => 'required',
-//            'gender' => 'required',
-//            'birth' => 'required',
-//            'email' => 'required',
-//            'phone' => 'required',
-//            'type_address' => 'required',
-//            'country' => 'required',
-//            'region' => 'required',
-//            'city' => 'required',
-//            'street' => 'required',
-//            'postalcode' => 'required',
-//            'certificate_type' => 'required',
-//            'id_number' => 'required',
-//            'id_expire_date' => 'required',
-//            'residential_address' => 'required',
-            'id_img' => 'required',
-//            'id_back_img' => 'required',
-            #'id_person_img' => 'required',
+            'type' => 'required',
+            'firstname' => 'required',
+            'middlename' => 'required',
+            'familyname' => 'required',
+            'gender' => 'required',
+            'birth' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'type_address' => 'required',
+            'country' => 'required',
+            'region' => 'required',
+            'city' => 'required',
+            'street' => 'required',
+            'postalcode' => 'required',
+            'certificate_type' => 'required',
+            'id_number' => 'required',
+            'id_expire_date' => 'required',
+            'residential_address' => 'required',
+            'id_img' => 'required|image',
+            'id_back_img' => 'required|image',
+            'id_person_img' => 'required|image',
         ]);
 
-            $file = $Request->file('id_img');
-            // 文件是否上传成功
-            if ($file->isValid()) {
-                // 获取文件相关信息
-                $ext = $file->getClientOriginalExtension();     // 扩展名
-                $type = $file->getClientMimeType();     // image/jpeg
-                // 上传文件
-                $filename = date('Y-m-d-H-i-s') . '-' . uniqid() . '.' . $ext;
-                $path = $file->storeAs('uploads', $filename);
-                var_dump($path);
-            }
+        $file = $Request->file('id_img');
+        if ($file->isValid()) {
+            $ext = $file->getClientOriginalExtension();     // 扩展名
+            $filename = date('Y-m-d-H-i-s') . '-' . uniqid() . '.' . $ext;
+            $path = $file->storeAs('uploads', $filename);
+            $validatedData['id_img'] = $path;
+        }
 
+        $file = $Request->file('id_back_img');
+        if ($file->isValid()) {
+            $ext = $file->getClientOriginalExtension();     // 扩展名
+            $filename = date('Y-m-d-H-i-s') . '-' . uniqid() . '.' . $ext;
+            $path = $file->storeAs('uploads', $filename);
+            $validatedData['id_back_img'] = $path;
+        }
 
-
-
-        exit;
-
+        $file = $Request->file('id_person_img');
+        if ($file->isValid()) {
+            $ext = $file->getClientOriginalExtension();     // 扩展名
+            $filename = date('Y-m-d-H-i-s') . '-' . uniqid() . '.' . $ext;
+            $path = $file->storeAs('uploads', $filename);
+            $validatedData['id_person_img'] = $path;
+        }
+        $uid = Auth::id();
+        if($KycRepository->saveKycInfo($uid, $validatedData)){
+            return view('kycSuccess');
+        }
+        return view('error', ['message' => 'KYC validation failed']);
     }
 
 }

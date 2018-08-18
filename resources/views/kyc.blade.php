@@ -27,7 +27,7 @@
                                 <label for="exampleInputEmail1">Type</label>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="type" id="optionsRadios_type1" value="Natural_person" checked>
+                                        <input type="radio" name="type" id="optionsRadios_type1" value="natural_person" checked>
                                         Natural_person
                                     </label>
                                     &nbsp;&nbsp;

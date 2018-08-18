@@ -22,8 +22,8 @@ Route::get('/settings', 'SettingsController@index');
 Route::post('sendEmailCode', 'EmailController@sendEmailCode');
 Route::post('/kyc/save', 'KycController@save');
 Route::get('/buy', 'PurchaseController@buy');
-Route::post('/doBuy', 'PurchaseController@doBuy');
-
+Route::post('/dobuy', 'PurchaseController@doBuy');
+Route::get('/confirmbuy', 'PurchaseController@confirmBuy');
 
 Route::any('/upload', 'FileController@upload');
 

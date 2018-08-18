@@ -57,7 +57,7 @@ class PurchaseRepository
         $orderModel = new Order();
         $orderModel->uid = $orderInfo['uid'];
         $orderModel->order_id = $orderInfo['order_id'];
-        $orderModel->memo_code = $orderInfo['memo_code'];
+        $orderModel->mem_code = $orderInfo['mem_code'];
         $orderModel->order_status = $orderInfo['order_status'];
         $orderModel->order_currency = $orderInfo['order_currency'];
         $orderModel->order_amount = $orderInfo['order_amount'];

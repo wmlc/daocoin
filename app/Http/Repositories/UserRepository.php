@@ -11,4 +11,8 @@ class UserRepository
         return $data['wallet_address'];
     }
 
+    public function saveUserWalletAddress($uid, $walletAddress){
+        return UserProfile::query()->where(['uid' => $uid])->update(['wallet_address' => $walletAddress]);
+    }
+
 }
