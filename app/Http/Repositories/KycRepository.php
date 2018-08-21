@@ -49,10 +49,10 @@ class KycRepository
         $model->first_name = $data['firstname'];
         $model->middle_name = $data['middlename'];
         $model->family_name = $data['familyname'];
-        $model->birth = $data['birth'];
+        $model->birth = date('Y-m-d', strtotime($data['birth']));
         $model->certificate_type = $data['certificate_type'];
         $model->certificate_id = $data['id_number'];
-        $model->certificate_expiry_date = $data['id_expire_date'];
+        $model->certificate_expiry_date = date('Y-m-d', strtotime($data['id_expire_date']));
         $model->address = $data['residential_address'];
         $model->id_img = $data['id_img'];
         $model->id_back_img = $data['id_back_img'];

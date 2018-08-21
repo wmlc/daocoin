@@ -89,7 +89,20 @@ class PurchaseController extends Controller
         return view('check_wating');
     }
 
+    public function setPaymentMethod(Request $Request){
+        if(strtolower($Request->method()) == 'get'){
+            return view('set_payment_method');
+        } else {
+            return view('check_wating');
+        }
+
+
+    }
+
     public function redeem(){
+        # 获取用户支付方式
+
+        return view();
         
     }
 
