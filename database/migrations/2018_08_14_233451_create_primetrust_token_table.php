@@ -19,6 +19,7 @@ class CreatePrimetrustTokenTable extends Migration
             $table->string('token', 255)->comment('认证token');
             $table->dateTime('expiry')->comment('过期时间');
         });
+        DB::statement("ALTER TABLE `primetrust_token` comment 'primetrust认证token记录表'");
     }
 
     /**

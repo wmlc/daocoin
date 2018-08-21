@@ -89,4 +89,8 @@ class PurchaseController extends Controller
         return view('check_wating');
     }
 
+    public function redeem(){
+        
+    }
+
 }
