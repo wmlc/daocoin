@@ -36,96 +36,96 @@
                             <div class="box-body" style="padding:20px;">
 
                                 <div class="form-group">
-                                    <label for="">ach-check-type</label>
+                                    <label for="">ach_check_type</label>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="ach-check-type" value="personal" checked> personal
+                                            <input type="radio" name="ach_check_type" value="personal" checked> personal
                                         </label>
                                         &nbsp;&nbsp;
                                         <label>
-                                            <input type="radio" name="ach-check-type" value="business"> business
+                                            <input type="radio" name="ach_check_type" value="business"> business
                                         </label>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="">bank-account-name</label>
-                                    <input type="text" class="form-control" placeholder="bank-account-name">
+                                    <input type="text" class="form-control" name="bank_account_name" placeholder="bank-account-name">
                                 </div>
                                 <div class="form-group">
                                     <label for="">bank-account-type</label>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="bank-account-type" value="checking" checked>
+                                            <input type="radio" name="bank_account_type" value="checking" checked>
                                             checking
                                         </label>
                                         &nbsp;&nbsp;
                                         <label>
-                                            <input type="radio" name="bank-account-type" value="savings"> savings
+                                            <input type="radio" name="bank_account_type" value="savings"> savings
                                         </label>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="">bank-account-number</label>
-                                    <input type="text" class="form-control" name="bank-account-number"
+                                    <input type="text" class="form-control" name="bank_account-number"
                                            placeholder="bank-account-number">
                                 </div>
                                 <div class="form-group">
                                     <label for="">contact-name</label>
-                                    <input type="text" class="form-control" name="contact-name"
+                                    <input type="text" class="form-control" name="contact_name"
                                            placeholder="contact-name">
                                 </div>
                                 <div class="form-group">
                                     <label for="">contact-email</label>
-                                    <input type="email" class="form-control" name="contact-email"
+                                    <input type="email" class="form-control" name="contact_email"
                                            placeholder="contact-email">
                                 </div>
                                 <div class="form-group">
                                     <label for="">intermediary-bank-name</label>
-                                    <input type="text" class="form-control" name="intermediary-bank-name"
+                                    <input type="text" class="form-control" name="intermediary_bank-name"
                                            placeholder="intermediary-bank-name">
                                 </div>
                                 <div class="form-group">
                                     <label for="">intermediary-bank-reference</label>
-                                    <input type="text" class="form-control" name="intermediary-bank-reference"
+                                    <input type="text" class="form-control" name="intermediary_bank_reference"
                                            placeholder="intermediary-bank-reference">
                                 </div>
                                 <div class="form-group">
                                     <label for="">payment-type</label>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="payment-type" value="ach" checked> ach
+                                            <input type="radio" name="payment_type" value="ach" checked> ach
                                         </label>
                                         &nbsp;&nbsp;
                                         <label>
-                                            <input type="radio" name="payment-type" value="check"> check
+                                            <input type="radio" name="payment_type" value="check"> check
                                         </label>
                                         &nbsp;&nbsp;
                                         <label>
-                                            <input type="radio" name="payment-type" value="credit-card"> credit-card
+                                            <input type="radio" name="payment_type" value="credit-card"> credit-card
                                         </label>
                                         &nbsp;&nbsp;
                                         <label>
-                                            <input type="radio" name="payment-type" value="wire"> wire
+                                            <input type="radio" name="payment_type" value="wire"> wire
                                         </label>
                                         &nbsp;&nbsp;
                                         <label>
-                                            <input type="radio" name="payment-type" value="wire-international">
+                                            <input type="radio" name="payment_type" value="wire-international">
                                             wire-international
                                         </label>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="">routing-number</label>
-                                    <input type="text" class="form-control" name="routing-number"
+                                    <input type="text" class="form-control" name="routing_number"
                                            placeholder="routing-number">
                                 </div>
                                 <div class="form-group">
                                     <label for="">swift-code</label>
-                                    <input type="text" class="form-control" name="swift-code" placeholder="swift-code">
+                                    <input type="text" class="form-control" name="swift_code" placeholder="swift-code">
                                 </div>
                                 <div class="form-group">
                                     <label for="">bank-name</label>
-                                    <input type="text" class="form-control" name="bank-name" placeholder="bank-name">
+                                    <input type="text" class="form-control" name="bank_name" placeholder="bank-name">
                                 </div>
 
                             </div>

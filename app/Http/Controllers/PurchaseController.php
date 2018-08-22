@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Helpers\FuntionHelper;
 use App\Http\Repositories\KycRepository;
 use App\Http\Repositories\PurchaseRepository;
+use App\Http\Repositories\RedeemRepository;
 use App\Http\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -89,10 +90,34 @@ class PurchaseController extends Controller
         return view('check_wating');
     }
 
-    public function setPaymentMethod(Request $Request){
+    public function setPaymentMethod(Request $Request,
+                                     RedeemRepository $RedeemRepository){
         if(strtolower($Request->method()) == 'get'){
             return view('set_payment_method');
         } else {
+            $validatedData = $Request->validate([
+                'ach_check_type' => 'required',
+                'bank_account_name' => 'required',
+                'bank_account_type' => 'required',
+                'bank_account_number' => 'required',
+                'contact_name' => 'required',
+                'contact_email' => 'required',
+                'intermediary_bank_name' => 'required',
+                'intermediary_bank_reference' => 'required',
+                'type_address' => 'required',
+                'payment_type' => 'required',
+                'routing_number' => 'required',
+                'swift_code' => 'required',
+                'bank_name' => 'required',
+            ]);
+
+            $uid = Auth::id();
+            $RedeemRepository->savePaymentMethod($uid, $validatedData);
+
+
+
+
+
             return view('check_wating');
         }
 
