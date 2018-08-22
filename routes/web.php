@@ -24,7 +24,8 @@ Route::post('/kyc/save', 'KycController@save');
 Route::get('/buy', 'PurchaseController@buy');
 Route::post('/dobuy', 'PurchaseController@doBuy');
 Route::get('/confirmbuy', 'PurchaseController@confirmBuy');
-Route::any('/setPaymentMethod', 'PurchaseController@setPaymentMethod');
+Route::get('/setPaymentMethod', 'PurchaseController@setPaymentMethod');
+Route::post('/setPaymentMethod', 'PurchaseController@setPaymentMethod');
 
 
 

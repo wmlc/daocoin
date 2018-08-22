@@ -33,6 +33,7 @@
                         </div>
 
                         <form role="form" action="/setPaymentMethod" method="post">
+                            @csrf
                             <div class="box-body" style="padding:20px;">
 
                                 <div class="form-group">
@@ -66,7 +67,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="">bank-account-number</label>
-                                    <input type="text" class="form-control" name="bank_account-number"
+                                    <input type="text" class="form-control" name="bank_account_number"
                                            placeholder="bank-account-number">
                                 </div>
                                 <div class="form-group">
@@ -81,7 +82,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="">intermediary-bank-name</label>
-                                    <input type="text" class="form-control" name="intermediary_bank-name"
+                                    <input type="text" class="form-control" name="intermediary_bank_name"
                                            placeholder="intermediary-bank-name">
                                 </div>
                                 <div class="form-group">

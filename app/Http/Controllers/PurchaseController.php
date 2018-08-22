@@ -95,6 +95,7 @@ class PurchaseController extends Controller
         if(strtolower($Request->method()) == 'get'){
             return view('set_payment_method');
         } else {
+//            var_dump($_REQUEST);exit;
             $validatedData = $Request->validate([
                 'ach_check_type' => 'required',
                 'bank_account_name' => 'required',
@@ -104,24 +105,18 @@ class PurchaseController extends Controller
                 'contact_email' => 'required',
                 'intermediary_bank_name' => 'required',
                 'intermediary_bank_reference' => 'required',
-                'type_address' => 'required',
                 'payment_type' => 'required',
                 'routing_number' => 'required',
                 'swift_code' => 'required',
                 'bank_name' => 'required',
             ]);
-
             $uid = Auth::id();
-            $RedeemRepository->savePaymentMethod($uid, $validatedData);
-
-
-
-
-
-            return view('check_wating');
+            if($RedeemRepository->savePaymentMethod($uid, $validatedData)){
+                return view('error', ['message' => 'Your receiving bank has been certified successfully!
+Now you can start the first stroke Redeem Token to Fiat']);
+            }
+            return view('error', ['message' => 'Please be patient and review your receiving bank information']);
         }
-
-
     }
 
     public function redeem(){
