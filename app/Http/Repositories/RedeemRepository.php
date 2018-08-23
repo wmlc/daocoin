@@ -76,4 +76,39 @@ class RedeemRepository
     public function getUserPaymentMethod($uid){
         return PaymentMethod::query()->where(['uid' => $uid])->first();
     }
+
+    public function isSetPaymentMethod($uid){
+        $paymentMethodInfo = PaymentMethod::query()->where(['uid' => $uid])->first(['payment_method_id']);
+        if(empty($paymentMethodInfo) || empty($paymentMethodInfo['payment_method_id'])){
+            return false;
+        }
+        return true;
+    }
+
+    public function saveRedeemOrder(){
+
+    }
+
+    /**
+     * 发起赎回申请   调用第三方接口
+     * @return bool
+     */
+    public function sendRedeemApply(){
+        $api = Config::$API . '/v2/disbursements';
+        $PrimetrustTokenRepository = new PrimetrustTokenRepository();
+        $header = [
+            'token' => $PrimetrustTokenRepository->getToken(),
+        ];
+        $data = [
+            'account-id' => Config::$ACCOUNT_ID,
+            'amount' => -100,
+            'customer-reference' => '将与支付一起使用的参考信息',
+            'description' => '',
+            'payment-method-id' => '3245323',
+            'payment_method' => ''
+        ];
+        $res = CurlHelper::http($api, 'POST', $data, $header);
+        $res = json_decode($res, true);
+        return $res;
+    }
 }

@@ -36,11 +36,12 @@
 
               </div>
 
-              <form role="form">
+              <form role="form" action="/saveRedeemOrder" method="post">
+                @csrf
                 <div class="box-body" style="padding:20px;">
                   <div class="form-group">
                     <label for="">Transaction ID</label>
-                    <input type="text" class="form-control" id="" placeholder="Transaction ID">
+                    <input type="text" class="form-control" name="orderHash" id="" placeholder="Transaction ID">
                   </div>
 
                   <p>The transaction ID is the transaction signature, indicating that the transfer is successful, please be sure to fill out.</p>

@@ -119,11 +119,27 @@ Now you can start the first stroke Redeem Token to Fiat']);
         }
     }
 
-    public function redeem(){
-        # 获取用户支付方式
+    public function redeem(KycRepository $KycRepository, RedeemRepository $RedeemRepository){
+        $uid = Auth::id();
+        # 检查用户aml认证
+        if(!$KycRepository->isKyc($uid)){
+            return redirect('/kyc');
+        }
 
-        return view();
-        
+        # 检查是否设置支付方式
+        if(!$RedeemRepository->isSetPaymentMethod($uid)){
+            return redirect('/setPaymentMethod');
+        }
+        return view('getPayMethod');
+    }
+
+    public function saveRedeemOrder(Request $Request){
+        $validatedData = $Request->validate([
+            'orderHash' => 'required',
+        ]);
+        return view('check_wating');
+
+
     }
 
 }
