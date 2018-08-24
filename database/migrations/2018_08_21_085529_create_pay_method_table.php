@@ -30,6 +30,7 @@ class CreatePayMethodTable extends Migration
             $table->string('swift_code', 255)->comment('用于国际电线的SWIFT代码。');
             $table->string('bank_name', 255)->comment('持有给制定账户名称');
             $table->string('payment_method_id', 255)->default('')->comment('付款方式id');
+            $table->unique('uid');
         });
         DB::statement("ALTER TABLE `payment_method` comment '用户支付方式设置表'");
     }

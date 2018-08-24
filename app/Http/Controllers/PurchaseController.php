@@ -92,8 +92,10 @@ class PurchaseController extends Controller
 
     public function setPaymentMethod(Request $Request,
                                      RedeemRepository $RedeemRepository){
+        $uid = Auth::id();
         if(strtolower($Request->method()) == 'get'){
-            return view('set_payment_method');
+            $paymentMethod = $RedeemRepository->getPaymentMethod($uid);
+            return view('set_payment_method', ['paymentMethod' => $paymentMethod]);
         } else {
 //            var_dump($_REQUEST);exit;
             $validatedData = $Request->validate([
@@ -110,7 +112,6 @@ class PurchaseController extends Controller
                 'swift_code' => 'required',
                 'bank_name' => 'required',
             ]);
-            $uid = Auth::id();
             if($RedeemRepository->savePaymentMethod($uid, $validatedData)){
                 return view('error', ['message' => 'Your receiving bank has been certified successfully!
 Now you can start the first stroke Redeem Token to Fiat']);

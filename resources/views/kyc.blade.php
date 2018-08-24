@@ -25,6 +25,18 @@
                         @csrf
                         <div class="box-body">
                             <div class="form-group">
+
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+
+
                                 <label for="exampleInputEmail1">Type</label>
                                 <div class="radio">
                                     <label>
@@ -91,7 +103,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input type="text" value="{{isset($kycInfo['birth']) ? $kycInfo['birth'] : ''}}" name="birth" class="form-control pull-right" id="datepicker" placeholder="Date of birth">
+                                    <input type="text" value="{{isset($kycInfo['birth']) ? date('m/d/Y', strtotime($kycInfo['birth'])) : ''}}" name="birth" class="form-control pull-right" id="datepicker" placeholder="Date of birth">
                                 </div>
 
                             </div>
@@ -166,7 +178,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input type="text" value="{{isset($kycInfo['certificate_expiry_date']) ? $kycInfo['certificate_expiry_date'] : ''}}" name="id_expire_date" class="form-control pull-right" id="datepicker1" placeholder="ID Expiry date">
+                                    <input type="text" value="{{isset($kycInfo['certificate_expiry_date']) ? date('m/d/Y', strtotime($kycInfo['certificate_expiry_date'])) : ''}}" name="id_expire_date" class="form-control pull-right" id="datepicker1" placeholder="ID Expiry date">
                                 </div>
 
                             </div>
@@ -222,30 +234,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
-
-                            {{--<div class="form-group">--}}
-                                {{--<label for="exampleInputFile">Certificate</label>--}}
-                                {{--<input type="file" name="id_img">--}}
-
-                                {{--<p class="help-block">Please upload a high resolution picture of the front of passport--}}
-                                                      {{--The file can be in PDF, JPEG(.jpg) and PNG(.png) format and cannot exceed 2M--}}
-                                {{--</p>--}}
-
-                                {{--<input type="file" name="id_back_img">--}}
-
-                                {{--<p class="help-block">Please upload a high resolution picture of the front of passport--}}
-                                                      {{--The file can be in PDF, JPEG(.jpg) and PNG(.png) format and cannot exceed 2M--}}
-                                {{--</p>--}}
-{{--n--}}
-                                {{--<input type="file" name="id_person_img">--}}
-
-                                {{--<p class="help-block">Please upload a high resolution picture of the front of passport--}}
-                                                      {{--The file can be in PDF, JPEG(.jpg) and PNG(.png) format and cannot exceed 2M--}}
-                                {{--</p>--}}
-                            {{--</div>--}}
-
                         </div>
                         <!-- /.box-body -->
 

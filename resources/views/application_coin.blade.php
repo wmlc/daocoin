@@ -27,6 +27,15 @@
               <form role="form" action="/dobuy" method="post">
                 @csrf
                 <div class="box-body" style="padding:20px;">
+                  @if ($errors->any())
+                    <div class="alert alert-danger">
+                      <ul>
+                        @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                        @endforeach
+                      </ul>
+                    </div>
+                  @endif
                   <div class="form-group">
                     <label for="exampleInputEmail1">ERC20 address</label>
                     <input type="text" class="form-control" name="walletAddress" value="{{$walletAddress}}" placeholder="ERC20 address">

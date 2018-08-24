@@ -85,6 +85,10 @@ class RedeemRepository
         return true;
     }
 
+    public function getPaymentMethod($uid){
+        return PaymentMethod::query()->where(['uid' => $uid])->first();
+    }
+
     public function saveRedeemOrder(){
 
     }

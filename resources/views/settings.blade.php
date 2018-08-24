@@ -16,6 +16,15 @@
                     <!-- form start -->
                     <form role="form">
                         <div class="box-body">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Nationality</label>
                                 <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Malawi">
