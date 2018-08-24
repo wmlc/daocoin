@@ -62,7 +62,7 @@ class ContractRepository
 //  string(20) "No message available"
 //                ["path"]=>
 //  string(31) "/contract/getTransactionReceipt"
-}
+//}
 
             return json_decode($res, true);
         }
