@@ -15,7 +15,6 @@ class PurchaseController extends Controller
 {
     /**
      * Create a new controller instance.
-     *
      * @return void
      */
     public function __construct()
@@ -24,11 +23,12 @@ class PurchaseController extends Controller
     }
 
     public function buy(KycRepository $KycRepository,
-                        UserRepository $UserRepository){
+                        UserRepository $UserRepository)
+    {
         $uid = Auth::id();
         # 检查用户是否通过aml验证
         $isKyc = $KycRepository->isKyc($uid);
-        if(!$isKyc){
+        if (!$isKyc) {
             return view('checking_kyc');
         }
         # 获取用户钱包地址：
@@ -38,7 +38,8 @@ class PurchaseController extends Controller
 
     public function doBuy(Request $Request,
                           PurchaseRepository $PurchaseRepository,
-                          UserRepository $UserRepository){
+                          UserRepository $UserRepository)
+    {
 
         $validatedData = $Request->validate([
             'walletAddress' => ['required', new EthAddress],
@@ -65,10 +66,10 @@ class PurchaseController extends Controller
         ];
         # 保存订单信息
         $orderId = $PurchaseRepository->saveOrder($orderInfo);
-        if($orderId){
+        if ($orderId) {
             # 铸币订单发送
             $data = $PurchaseRepository->contributions($validatedData['amount']);
-            if(empty($data)){
+            if (empty($data)) {
                 return view('error', ['message' => 'Mint failure.']);
             } else {
                 # 更新订单状态
@@ -77,7 +78,7 @@ class PurchaseController extends Controller
                     'order_status' => 'orderNopay',
                     'mem_code' => $data['attributes']['reference-number'],
                 ];
-                if($PurchaseRepository->updateOrder($orderId, $orderInfo)){
+                if ($PurchaseRepository->updateOrder($orderId, $orderInfo)) {
                     return view('payment_method', ['mem_code' => $orderInfo['mem_code']]);
                 }
                 return view('error', ['message' => 'Mint failure.']);
@@ -86,14 +87,16 @@ class PurchaseController extends Controller
         return view('error', ['message' => 'The order preservation failed.']);
     }
 
-    public function confirmBuy(){
+    public function confirmBuy()
+    {
         return view('check_wating');
     }
 
     public function setPaymentMethod(Request $Request,
-                                     RedeemRepository $RedeemRepository){
+                                     RedeemRepository $RedeemRepository)
+    {
         $uid = Auth::id();
-        if(strtolower($Request->method()) == 'get'){
+        if (strtolower($Request->method()) == 'get') {
             $paymentMethod = $RedeemRepository->getPaymentMethod($uid);
             return view('set_payment_method', ['paymentMethod' => $paymentMethod]);
         } else {
@@ -111,38 +114,57 @@ class PurchaseController extends Controller
                 'swift_code' => 'required',
                 'bank_name' => 'required',
             ]);
-            if($RedeemRepository->savePaymentMethod($uid, $validatedData)){
+            if ($RedeemRepository->savePaymentMethod($uid, $validatedData)) {
                 return view('setPaymentMethodSuccess');
             }
             return view('error', ['message' => 'Please be patient and review your receiving bank information']);
         }
     }
 
-    public function redeem(KycRepository $KycRepository, RedeemRepository $RedeemRepository){
+    public function redeem(KycRepository $KycRepository, RedeemRepository $RedeemRepository)
+    {
         $uid = Auth::id();
         # 检查用户aml认证
-        if(!$KycRepository->isKyc($uid)){
+        if (!$KycRepository->isKyc($uid)) {
             return redirect('/kyc');
         }
         # 检查是否设置支付方式
-        if(!$RedeemRepository->isSetPaymentMethod($uid)){
+        if (!$RedeemRepository->isSetPaymentMethod($uid)) {
             return redirect('/setPaymentMethod');
         }
         return view('getPayMethod');
     }
 
-    public function saveRedeemOrder(Request $Request){
+    public function saveRedeemOrder(KycRepository $KycRepository, Request $Request, RedeemRepository $RedeemRepository)
+    {
         $validatedData = $Request->validate([
             'orderHash' => 'required',
         ]);
-
-
-
-
-
-        return view('check_wating');
-
-
+        $redeemInfo = [
+            'uid' => Auth::id(),
+            'redeem_id' => date('YmdHis') . Auth::id() . FuntionHelper::randStr(10),
+            'redeem_status' => 'orderStart',
+            'redeem_currency' => '',
+            'redeem_amount' => '',
+            'token_name' => 'USDD',
+            'token_amount' => '',
+            'orderHash' => $validatedData['orderHash'],
+        ];
+        $uid = Auth::id();
+        # 检查用户aml认证
+        if (!$KycRepository->isKyc($uid)) {
+            return redirect('/kyc');
+        }
+        # 检查是否设置支付方式
+        if (!$RedeemRepository->isSetPaymentMethod($uid)) {
+            return redirect('/setPaymentMethod');
+        }
+        # 保存订单信息
+        $orderId = $RedeemRepository->saveRedeem($redeemInfo);
+        if ($orderId) {
+            return view('check_wating');
+        }
+        return view('error', ['message' => 'The order preservation failed.']);
     }
 
 }

@@ -6,10 +6,25 @@ use App\Http\Constants\Config;
 use App\Http\Helpers\CurlHelper;
 use App\Http\Models\Order;
 use App\Http\Models\PaymentMethod;
+use App\Http\Models\Redeem;
 
 
 class RedeemRepository
 {
+    public function saveRedeem($redeemInfo){
+        $orderModel = new Redeem();
+        $orderModel->uid = $redeemInfo['uid'];
+        $orderModel->redeem_id = $redeemInfo['redeem_id'];
+        $orderModel->redeem_status = $redeemInfo['redeem_status'];
+        $orderModel->redeem_currency = $redeemInfo['redeem_currency'];
+        $orderModel->redeem_amount = $redeemInfo['redeem_amount'];
+        $orderModel->token_name = $redeemInfo['token_name'];
+        $orderModel->token_amount = $redeemInfo['token_amount'];
+        $orderModel->orderHash = $redeemInfo['orderHash'];
+        $orderModel->save();
+        return $orderModel->id;
+    }
+
     public function setPaymentMethod($data){
         $api = Config::$API . '/v2/payment-methods';
         $PrimetrustTokenRepository = new PrimetrustTokenRepository();
