@@ -38,6 +38,15 @@
 
               <form role="form" action="/saveRedeemOrder" method="post">
                 @csrf
+                @if ($errors->any())
+                  <div class="alert alert-danger">
+                    <ul>
+                      @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                      @endforeach
+                    </ul>
+                  </div>
+                @endif
                 <div class="box-body" style="padding:20px;">
                   <div class="form-group">
                     <label for="">Transaction ID</label>

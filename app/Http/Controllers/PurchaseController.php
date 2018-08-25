@@ -7,6 +7,7 @@ use App\Http\Repositories\KycRepository;
 use App\Http\Repositories\PurchaseRepository;
 use App\Http\Repositories\RedeemRepository;
 use App\Http\Repositories\UserRepository;
+use App\Rules\EthHashCode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Rules\EthAddress;
@@ -138,7 +139,7 @@ class PurchaseController extends Controller
     public function saveRedeemOrder(KycRepository $KycRepository, Request $Request, RedeemRepository $RedeemRepository)
     {
         $validatedData = $Request->validate([
-            'orderHash' => 'required',
+            'orderHash' => ['required', new EthHashCode()],
         ]);
         $redeemInfo = [
             'uid' => Auth::id(),

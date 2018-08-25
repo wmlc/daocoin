@@ -29,7 +29,7 @@
                 <!-- small box -->
                 <div class="small-box bg-green">
                     <div class="inner">
-                        <h3>0</h3>
+                        <h3>{{$balance}}</h3>
 
                         <p>Total Amount($US)</p>
                     </div>
@@ -91,11 +91,11 @@
                         <a href="/buy"><button type="button" class="btn btn-info">Convert Fiat to Token</button></a>
                     </div>
                     <div class="btn-group">
-                        <a href="/redeem"><button type="button" class="btn btn-default">Redeem Token to Fiat</button>
+                        <a href="/redeem"><button type="button" class="btn btn-default">Redeem Token to Fiat</button></a>
                     </div>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-success">Trade Token in Exchange</button>
-                    </div>
+                    {{--<div class="btn-group">--}}
+                        {{--<button type="button" class="btn btn-success">Trade Token in Exchange</button>--}}
+                    {{--</div>--}}
                 </div>
             </div>
             <!-- /.box-body -->
