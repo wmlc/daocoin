@@ -25,11 +25,11 @@
                     <i class="fa fa-shopping-cart"></i> <span>RedeemOrder</span>
                 </a>
             </li>
-            <li>
-                <a href="/settings">
-                    <i class="fa fa-cog"></i> <span>Settings</span>
-                </a>
-            </li>
+            {{--<li>--}}
+                {{--<a href="/settings">--}}
+                    {{--<i class="fa fa-cog"></i> <span>Settings</span>--}}
+                {{--</a>--}}
+            {{--</li>--}}
 
         </ul>
     </section>
