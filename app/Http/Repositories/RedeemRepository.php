@@ -12,6 +12,10 @@ use App\Http\Models\Redeem;
 
 class RedeemRepository
 {
+    public function getOrderList($uid){
+        return Redeem::query()->where(['uid' => $uid])->orderByDesc('id')->paginate(30);
+    }
+
     public function getSearchOrderCount()
     {
         return Redeem::query()->where('order_status', '<>', 'overdue')->count();

@@ -16,8 +16,13 @@
                 </a>
             </li>
             <li>
-                <a href="/order">
-                    <i class="fa fa-shopping-cart"></i> <span>Order</span>
+                <a href="/buyOrder">
+                    <i class="fa fa-shopping-cart"></i> <span>PurchaseOrder</span>
+                </a>
+            </li>
+            <li>
+                <a href="/redeemOrder">
+                    <i class="fa fa-shopping-cart"></i> <span>RedeemOrder</span>
                 </a>
             </li>
             <li>

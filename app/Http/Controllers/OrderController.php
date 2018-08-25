@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Repositories\PurchaseRepository;
+use App\Http\Repositories\RedeemRepository;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
@@ -27,6 +28,12 @@ class OrderController extends Controller
         $uid = Auth::id();
         $orderList = $PurchaseRepository->getOrderList($uid);
         return view('order', ['orderList' => $orderList]);
+    }
+
+    public function redeem(RedeemRepository $RedeemRepository){
+        $uid = Auth::id();
+        $redeemList = $RedeemRepository->getOrderList($uid);
+        return view('redeem', ['redeemList' => $redeemList]);
     }
 
 }

@@ -15,9 +15,10 @@ Auth::routes();
 
 Route::get('/', 'IndexController@index')->name('index');
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/OverView', 'OverViewController@index');
+Route::get('/OverView', 'HomeController@index');
 Route::get('/kyc', 'KycController@index');
-Route::get('/order', 'OrderController@index');
+Route::get('/buyOrder', 'OrderController@index');
+Route::get('/redeemOrder', 'OrderController@redeem');
 Route::get('/settings', 'SettingsController@index');
 Route::post('sendEmailCode', 'EmailController@sendEmailCode');
 Route::post('/kyc/save', 'KycController@save');
