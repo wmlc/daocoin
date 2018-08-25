@@ -12,30 +12,51 @@ class ContractRepository
     /**
      * 增发代币
      * @param $money
+     * @return bool|mixed
+     */
+    public function issueToken($money){
+        $api = Config::$API . '/contract/issueToken';
+        $data = [
+            'money' => $money,
+        ];
+        $res = CurlHelper::http($api, 'POST', $data);
+        if(!empty($res)){
+            return json_decode($res, true);
+        }
+        return false;
+    }
+
+    /**
+     * 转账代币
+     * @param $money
      * @param $to
      * @return bool|mixed
      */
-    public function issueToken($money, $to){
-        $api = Config::$API . '/contract/issueToken';
+    public function transferToken($money, $to){
+        $api = Config::$API . '/contract/transferToken';
         $data = [
             'money' => $money,
             'to' => $to
         ];
         $res = CurlHelper::http($api, 'POST', $data);
         if(!empty($res)){
+            return json_decode($res, true);
+        }
+        return false;
+    }
 
-//            array(5) {
-//                ["timestamp"]=>
-//  string(28) "2018-08-24T00:48:49.864+0000"
-//                ["status"]=>
-//  int(404)
-//  ["error"]=>
-//  string(9) "Not Found"
-//                ["message"]=>
-//  string(20) "No message available"
-//                ["path"]=>
-//  string(20) "/contract/issueToken"
-//}
+    /**
+     * 销毁代币
+     * @param $money
+     * @return bool|mixed
+     */
+    public function brunToken($money){
+        $api = Config::$API . '/contract/brunToken';
+        $data = [
+            'money' => $money,
+        ];
+        $res = CurlHelper::http($api, 'POST', $data);
+        if(!empty($res)){
             return json_decode($res, true);
         }
         return false;
@@ -50,20 +71,6 @@ class ContractRepository
         $api = Config::$API . '/contract/getTransactionReceipt?hashCode=' . $hashCode;
         $res = CurlHelper::http($api);
         if(!empty($res)){
-
-//            array(5) {
-//                ["timestamp"]=>
-//  string(28) "2018-08-24T00:53:10.904+0000"
-//                ["status"]=>
-//  int(404)
-//  ["error"]=>
-//  string(9) "Not Found"
-//                ["message"]=>
-//  string(20) "No message available"
-//                ["path"]=>
-//  string(31) "/contract/getTransactionReceipt"
-//}
-
             return json_decode($res, true);
         }
         return false;

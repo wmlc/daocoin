@@ -21,7 +21,7 @@ class RedeemRepository
             'bank-account-name' => $data['bank_account_name'],
             'bank-account-type' => $data['bank_account_type'],
             'bank-account-number' => $data['bank_account_number'],
-            'contact-email' => $data['contact_name'],
+            'contact-email' => $data['contact_email'],
             'contact-name' => $data['contact_name'],
             'intermediary-bank-name' => $data['intermediary_bank_name'],
             'intermediary-bank-reference' => $data['intermediary_bank_reference'],

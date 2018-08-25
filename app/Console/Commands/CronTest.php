@@ -60,7 +60,7 @@ class CronTest extends Command
 //        ];
 //        $KycRepository->auth($authData);
         #var_dump($ContractRepository->issueToken());
-        var_dump($ContractRepository->getTransactionReceipt('3rewr43f54td4354'));
+        var_dump($ContractRepository->getTransactionReceipt('0x919200895e2796aadb1b4e99404cf9af9615155a784c6a922580dfc6c30fa86a'));
         #echo $PrimetrustTokenRepository->getBalance();
     }
 }

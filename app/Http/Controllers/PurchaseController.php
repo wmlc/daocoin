@@ -97,7 +97,6 @@ class PurchaseController extends Controller
             $paymentMethod = $RedeemRepository->getPaymentMethod($uid);
             return view('set_payment_method', ['paymentMethod' => $paymentMethod]);
         } else {
-//            var_dump($_REQUEST);exit;
             $validatedData = $Request->validate([
                 'ach_check_type' => 'required',
                 'bank_account_name' => 'required',
