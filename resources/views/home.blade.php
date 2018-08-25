@@ -55,16 +55,27 @@
             <!-- ./col -->
             <div class="col-lg-3 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-red">
-                    <div class="inner">
-                        <h3>Unconfirmed</h3>
-
-                        <p>AML Check</p>
+                @if($is_aml)
+                    <div class="small-box bg-green">
+                        <div class="inner">
+                            <h3>confirmed</h3>
+                            <p>AML Check</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-checkmark-round"></i>
+                        </div>
                     </div>
-                    <div class="icon">
-                        <i class="ion ion-checkmark-round"></i>
+                @else
+                    <div class="small-box bg-red">
+                        <div class="inner">
+                            <h3>Unconfirmed</h3>
+                            <p>AML Check</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-checkmark-round"></i>
+                        </div>
                     </div>
-                </div>
+                @endif
             </div>
             <!-- ./col -->
         </div>
