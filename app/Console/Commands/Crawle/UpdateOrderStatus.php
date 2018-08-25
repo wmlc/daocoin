@@ -48,19 +48,27 @@ class UpdateOrderStatus extends Command
         for ($i=1; $i<=$pageNum; $i++){
             $orderList = $PurchaseRepository->getSearchOrderByPage($i, 100);
             foreach ($orderList as $key => $val){
-                $data = $PurchaseRepository->getContributionsInFo($val['primetrust_order_id']);
-                if(!empty($data)){
-                    $orderStatus = $PurchaseRepository->getOrderStatusByContributionsStatus($data['status']);
-                    if($orderStatus != $val['order_status']){
-                        $PurchaseRepository->updateOrderStatus($val['id'], $orderStatus);
-                    } else {
-                        # 超时失效
-                        if(time() - strtotime($val['created_at']) > Config::$ORDER_EXPIRY){
-                            $PurchaseRepository->updateOrderStatus($val['id'], 'nvalid');
+                switch ($val['order_status']){
+                    case 'orderNopay':
+                    $data = $PurchaseRepository->getContributionsInFo($val['primetrust_order_id']);
+                    if(!empty($data)){
+                        $orderStatus = $PurchaseRepository->getOrderStatusByContributionsStatus($data['status']);
+                        if(!empty($orderStatus) && $orderStatus != $val['order_status']){
+                            $PurchaseRepository->updateOrderStatus($val['id'], $orderStatus);
+                        } else {
+                            # 超时失效
+                            if(time() - strtotime($val['created_at']) > Config::$ORDER_EXPIRY){
+                                $PurchaseRepository->updateOrderStatus($val['id'], 'overdue');
+                            }
                         }
                     }
+                    break;
 
                 }
+
+
+
+
             }
         }
     }

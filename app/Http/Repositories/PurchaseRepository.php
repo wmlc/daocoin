@@ -88,30 +88,27 @@ class PurchaseRepository
     }
 
     public function getSearchOrderCount(){
-        return Order::query()->where(['order_status' => 'noPay'])->count();
+        return Order::query()->where('order_status', '<>', 'overdue')->count();
     }
 
     public function getSearchOrderByPage($page, $pageCount){
         $offset = bcmul(bcsub($page, '1', 0), $pageCount, 0);
-        return Order::query()->where(['order_status' => 'noPay'])->offset($offset)->limit($pageCount)->get()->toArray();
+        return Order::query()->where('order_status', '<>', 'overdue')->offset($offset)->limit($pageCount)->get()->toArray();
     }
 
     public function getOrderStatusByContributionsStatus($status){
         switch ($status){
             case 'pending':
-                $orderStatus = 'noPay';
+                $orderStatus = 'orderNopay';
                 break;
             case 'authorized':
-                $orderStatus = 'alreadyPaid';
-                break;
-            case 'settled':
-                $orderStatus = 'alreadyPaid';
+                $orderStatus = 'orderAlreadyPaid';
                 break;
             case 'cancelled':
-                $orderStatus = 'nvalid';
+                $orderStatus = 'overdue';
                 break;
             default:
-                $orderStatus = $status;
+                $orderStatus = false;
         }
         return $orderStatus;
     }

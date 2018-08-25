@@ -51,7 +51,7 @@ class PurchaseController extends Controller
             'uid' => Auth::id(),
             'order_id' => date('YmdHis') . Auth::id() . FuntionHelper::randStr(10),
             'mem_code' => '',
-            'order_status' => 'start',
+            'order_status' => 'ordersStart',
             'order_currency' => 'USDD',
             'order_amount' => $validatedData['amount'],
             'token_name' => 'USDD',
@@ -74,7 +74,7 @@ class PurchaseController extends Controller
                 # 更新订单状态
                 $orderInfo = [
                     'primetrust_order_id' => $data['id'],
-                    'order_status' => $PurchaseRepository->getOrderStatusByContributionsStatus($data['attributes']['status']),
+                    'order_status' => 'orderNopay',
                     'mem_code' => $data['attributes']['reference-number'],
                 ];
                 if($PurchaseRepository->updateOrder($orderId, $orderInfo)){

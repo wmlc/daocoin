@@ -18,7 +18,7 @@ class CreatePurchaseOrderTable extends Migration
             $table->timestamps();
             $table->integer('uid')->comment('用户id');
             $table->string('order_id', '64')->default('')->comment('订单号');
-            $table->string('order_status', 10)->default('no')->comment('订单是否完成 yes|no');
+            $table->string('order_status', 20)->default('no')->comment('订单是否完成 yes|no');
             $table->string('order_currency', 10)->comment('订单货币');
             $table->string('order_amount', 10)->comment('订单金额');
             $table->string('token_name', 10)->comment('token名称');
