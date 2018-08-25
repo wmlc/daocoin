@@ -15,4 +15,8 @@ class UserRepository
         return UserProfile::query()->where(['uid' => $uid])->update(['wallet_address' => $walletAddress]);
     }
 
+    public function getWalletAddressInfo($address){
+        return UserProfile::query()->where(['wallet_address' => $address])->first();
+    }
+
 }

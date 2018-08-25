@@ -15,7 +15,8 @@ class AddWalletAddressToUserProfileTable extends Migration
     {
         Schema::table('user_profile', function (Blueprint $table) {
             //
-            $table->string('wallet_address', 255)->comment('eth钱包地址');
+            $table->string('wallet_address', 100)->comment('eth钱包地址');
+            $table->unique('wallet_address');
         });
     }
 

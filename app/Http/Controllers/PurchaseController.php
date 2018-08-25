@@ -7,6 +7,7 @@ use App\Http\Repositories\KycRepository;
 use App\Http\Repositories\PurchaseRepository;
 use App\Http\Repositories\RedeemRepository;
 use App\Http\Repositories\UserRepository;
+use App\Rules\EthAddressUnique;
 use App\Rules\EthHashCode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,9 +42,8 @@ class PurchaseController extends Controller
                           PurchaseRepository $PurchaseRepository,
                           UserRepository $UserRepository)
     {
-
         $validatedData = $Request->validate([
-            'walletAddress' => ['required', 'unique:user_profile,wallet_address', new EthAddress],
+            'walletAddress' => ['required', new EthAddress, new EthAddressUnique()],
             'amount' => 'required|numeric',
         ]);
         # 更新用户绑定钱包地址
