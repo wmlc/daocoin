@@ -42,7 +42,7 @@ class PurchaseController extends Controller
     {
 
         $validatedData = $Request->validate([
-            'walletAddress' => ['required', new EthAddress],
+            'walletAddress' => ['required', 'unique:user_profile,wallet_address', new EthAddress],
             'amount' => 'required|numeric',
         ]);
         # 更新用户绑定钱包地址
