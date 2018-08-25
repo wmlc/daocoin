@@ -144,7 +144,7 @@ class PurchaseController extends Controller
             'uid' => Auth::id(),
             'redeem_id' => date('YmdHis') . Auth::id() . FuntionHelper::randStr(10),
             'redeem_status' => 'orderStart',
-            'redeem_currency' => '',
+            'redeem_currency' => 'USDD',
             'redeem_amount' => '',
             'token_name' => 'USDD',
             'token_amount' => '',

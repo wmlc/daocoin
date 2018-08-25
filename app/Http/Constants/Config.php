@@ -25,4 +25,6 @@ class Config{
 
     public static $PURCHASE_RATE = '0';
 
+    public static $GUANFANG_WALLET = '0x3bf8c068db23bbed8fa86701d60c9891eb758186';
+
 }

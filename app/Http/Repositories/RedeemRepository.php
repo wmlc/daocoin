@@ -11,7 +11,29 @@ use App\Http\Models\Redeem;
 
 class RedeemRepository
 {
-    public function saveRedeem($redeemInfo){
+    public function getSearchOrderCount()
+    {
+        return Redeem::query()->where('order_status', '<>', 'overdue')->count();
+    }
+
+    public function getSearchOrderByPage($page, $pageCount)
+    {
+        $offset = bcmul(bcsub($page, '1', 0), $pageCount, 0);
+        return Redeem::query()->where('order_status', '<>', 'overdue')->offset($offset)->limit($pageCount)->get()->toArray();
+    }
+
+    public function updateRedeemOrder($id, $data){
+        return Order::query()->where(['id' => $id])->update($data);
+    }
+
+    public function updateRedeemOrderStatus($orderId, $orderStatus){
+        $orderModel = Order::query()->find($orderId);
+        $orderModel->order_status = $orderStatus;
+        return $orderModel->save();
+    }
+
+    public function saveRedeem($redeemInfo)
+    {
         $orderModel = new Redeem();
         $orderModel->uid = $redeemInfo['uid'];
         $orderModel->redeem_id = $redeemInfo['redeem_id'];
@@ -25,7 +47,8 @@ class RedeemRepository
         return $orderModel->id;
     }
 
-    public function setPaymentMethod($data){
+    public function setPaymentMethod($data)
+    {
         $api = Config::$API . '/v2/payment-methods';
         $PrimetrustTokenRepository = new PrimetrustTokenRepository();
         $header = [
@@ -46,24 +69,25 @@ class RedeemRepository
             'bank-name' => $data['bank_name'],
         ];
         $res = CurlHelper::http($api, 'POST', $methodData, $header);
-        if(!empty($res)){
+        if (!empty($res)) {
             $res = json_decode($res, true);
-            if(isset($res['data']['id'])){
+            if (isset($res['data']['id'])) {
                 return $res['data']['id'];
             }
         }
         return false;
     }
 
-    public function savePaymentMethod($uid, $data){
+    public function savePaymentMethod($uid, $data)
+    {
         # 保存用户PaymentMethod信息
         # 查询用户PaymentMethod，不存在入库；存在未通过认证，更新；已存在且通过认证不操作
         $userPaymentMethod = $this->getUserPaymentMethod($uid);
-        if(empty($userPaymentMethod)){
+        if (empty($userPaymentMethod)) {
             $model = new PaymentMethod();
-        } elseif ($userPaymentMethod['payment_method_id'] == ''){
+        } elseif ($userPaymentMethod['payment_method_id'] == '') {
             $model = PaymentMethod::query()->find($userPaymentMethod['id']);
-        } elseif ($userPaymentMethod['payment_method_id'] != ''){
+        } elseif ($userPaymentMethod['payment_method_id'] != '') {
             return true;
         }
         $model->uid = $uid;
@@ -79,32 +103,36 @@ class RedeemRepository
         $model->routing_number = $data['routing_number'];
         $model->swift_code = $data['swift_code'];
         $model->bank_name = $data['bank_name'];
-        if($model->save()){
+        if ($model->save()) {
             $payment_method_id = $this->setPaymentMethod($data);
-            if($payment_method_id){
+            if ($payment_method_id) {
                 return PaymentMethod::query()->where(['uid' => $uid])->update(['payment_method_id' => $payment_method_id]);
             }
         }
         return false;
     }
 
-    public function getUserPaymentMethod($uid){
+    public function getUserPaymentMethod($uid)
+    {
         return PaymentMethod::query()->where(['uid' => $uid])->first();
     }
 
-    public function isSetPaymentMethod($uid){
+    public function isSetPaymentMethod($uid)
+    {
         $paymentMethodInfo = PaymentMethod::query()->where(['uid' => $uid])->first(['payment_method_id']);
-        if(empty($paymentMethodInfo) || empty($paymentMethodInfo['payment_method_id'])){
+        if (empty($paymentMethodInfo) || empty($paymentMethodInfo['payment_method_id'])) {
             return false;
         }
         return true;
     }
 
-    public function getPaymentMethod($uid){
+    public function getPaymentMethod($uid)
+    {
         return PaymentMethod::query()->where(['uid' => $uid])->first();
     }
 
-    public function saveRedeemOrder(){
+    public function saveRedeemOrder()
+    {
 
     }
 
@@ -112,7 +140,8 @@ class RedeemRepository
      * 发起赎回申请   调用第三方接口
      * @return bool
      */
-    public function sendRedeemApply(){
+    public function sendRedeemApply()
+    {
         $api = Config::$API . '/v2/disbursements';
         $PrimetrustTokenRepository = new PrimetrustTokenRepository();
         $header = [
@@ -124,7 +153,7 @@ class RedeemRepository
             'customer-reference' => '将与支付一起使用的参考信息',
             'description' => '',
             'payment-method-id' => '3245323',
-            'payment_method' => ''
+            'payment_method' => '',
         ];
         $res = CurlHelper::http($api, 'POST', $data, $header);
         $res = json_decode($res, true);
