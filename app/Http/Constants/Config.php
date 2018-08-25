@@ -23,4 +23,6 @@ class Config{
 
     public static $ORDER_EXPIRY = '129600';
 
+    public static $PURCHASE_RATE = '0';
+
 }

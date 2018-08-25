@@ -112,8 +112,7 @@ class PurchaseController extends Controller
                 'bank_name' => 'required',
             ]);
             if($RedeemRepository->savePaymentMethod($uid, $validatedData)){
-                return view('error', ['message' => 'Your receiving bank has been certified successfully!
-Now you can start the first stroke Redeem Token to Fiat']);
+                return view('setPaymentMethodSuccess');
             }
             return view('error', ['message' => 'Please be patient and review your receiving bank information']);
         }
@@ -125,7 +124,6 @@ Now you can start the first stroke Redeem Token to Fiat']);
         if(!$KycRepository->isKyc($uid)){
             return redirect('/kyc');
         }
-
         # 检查是否设置支付方式
         if(!$RedeemRepository->isSetPaymentMethod($uid)){
             return redirect('/setPaymentMethod');
@@ -137,6 +135,11 @@ Now you can start the first stroke Redeem Token to Fiat']);
         $validatedData = $Request->validate([
             'orderHash' => 'required',
         ]);
+
+
+
+
+
         return view('check_wating');
 
 
