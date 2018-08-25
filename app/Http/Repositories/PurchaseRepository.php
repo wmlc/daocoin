@@ -120,4 +120,8 @@ class PurchaseRepository
     public function getOrderList($uid){
         return Order::query()->where(['uid' => $uid])->orderByDesc('id')->paginate(30);
     }
+
+    public function getOrderNumByUser($uid){
+        return Order::query()->where(['uid' => $uid])->count();
+    }
 }

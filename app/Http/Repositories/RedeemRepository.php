@@ -16,6 +16,10 @@ class RedeemRepository
         return Redeem::query()->where(['uid' => $uid])->orderByDesc('id')->paginate(30);
     }
 
+    public function getRedeemNumByUser($uid){
+        return Redeem::query()->where(['uid' => $uid])->count();
+    }
+
     public function getSearchOrderCount()
     {
         return Redeem::query()->where('order_status', '<>', 'overdue')->count();
