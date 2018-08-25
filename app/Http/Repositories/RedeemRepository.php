@@ -22,13 +22,13 @@ class RedeemRepository
 
     public function getSearchOrderCount()
     {
-        return Redeem::query()->where('order_status', '<>', 'overdue')->count();
+        return Redeem::query()->where('redeem_status', '<>', 'overdue')->count();
     }
 
     public function getSearchOrderByPage($page, $pageCount)
     {
         $offset = bcmul(bcsub($page, '1', 0), $pageCount, 0);
-        return Redeem::query()->where('order_status', '<>', 'overdue')->offset($offset)->limit($pageCount)->get()->toArray();
+        return Redeem::query()->where('redeem_status', '<>', 'overdue')->offset($offset)->limit($pageCount)->get()->toArray();
     }
 
     public function updateRedeemOrder($id, $data){

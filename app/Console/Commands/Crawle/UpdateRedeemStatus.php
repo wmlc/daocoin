@@ -48,12 +48,12 @@ class UpdateRedeemStatus extends Command
         for ($i=1; $i<=$pageNum; $i++){
             $orderList = $RedeemRepository->getSearchOrderByPage($i, 100);
             foreach ($orderList as $key => $val){
-                switch ($val['order_status']){
+                switch ($val['redeem_status']){
                     # 查询该订单是否已转账
                     case 'orderStart':
                         $hashcode = $val['orderHash'];
                         $data = $ContractRepository->getTransactionReceipt($hashcode);
-                        if(!empty($data) && $data['code'] == '200'){
+                        if(!empty($data) && isset($data['code']) && $data['code'] == '200'){
                             # 验证转账人 和 收款人
                             $UserWalletAddress = $UserRepository->getUserWalletAddress($val['uid']);
                             if(isset($data['data']['from']) && $data['data']['from'] == $UserWalletAddress){
@@ -62,7 +62,7 @@ class UpdateRedeemStatus extends Command
                                     $updateData = [
                                         'redeem_amount' => $data['data']['tranferToken'],
                                         'token_amount' => $data['data']['tranferToken'],
-                                        'order_status' => 'OrderPaid',
+                                        'redeem_status' => 'OrderPaid',
                                     ];
                                     $RedeemRepository->updateRedeemOrder($val['id'], $updateData);
                                 }
@@ -82,7 +82,7 @@ class UpdateRedeemStatus extends Command
                             # 更新订单状态
                             $updateData = [
                                 'order_status_hashcode' => $data['hashcode'],
-                                'order_status' => 'brunToken',
+                                'redeem_status' => 'brunToken',
                             ];
                             $RedeemRepository->updateRedeemOrder($val['id'], $updateData);
                         } else {
@@ -99,7 +99,7 @@ class UpdateRedeemStatus extends Command
                         if(!empty($data) && $data['code'] == '200'){
                             # 更新订单状态
                             $updateData = [
-                                'order_status' => 'brunTokenSuccess',
+                                'redeem_status' => 'brunTokenSuccess',
                             ];
                             $RedeemRepository->updateRedeemOrder($val['id'], $updateData);
                         } else {
@@ -118,7 +118,7 @@ class UpdateRedeemStatus extends Command
                         if(!empty($data) && $data['code'] == '200'){
                             # 更新订单状态
                             $updateData = [
-                                'order_status' => 'redeemStart',
+                                'redeem_status' => 'redeemStart',
                                 'primetrust_redeem_id' => $data['data']['id'],
                             ];
                             $RedeemRepository->updateRedeemOrder($val['id'], $updateData);
