@@ -29,6 +29,8 @@ class CreateRedeemOrderTable extends Migration
             $table->string('redeem_fee', 10)->default('')->comment('赎回费');
             $table->string('redeem_rate', 10)->default('')->comment('赎回率');
             $table->string('dcp_in_return', 10)->default('')->comment('返还积分');
+            $table->string('order_status_hashcode', 100)->default('')->comment('订单状态对应hash');
+            $table->string('primetrust_redeem_id', 100)->default('')->comment('信托赎回订单id');
         });
         DB::statement("ALTER TABLE `redeem_order` comment '赎回订单表'");
     }

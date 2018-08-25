@@ -4,6 +4,7 @@ namespace App\Http\Repositories;
 
 use App\Http\Constants\Config;
 use App\Http\Helpers\CurlHelper;
+use App\Http\Helpers\FuntionHelper;
 use App\Http\Models\Order;
 use App\Http\Models\PaymentMethod;
 use App\Http\Models\Redeem;
@@ -131,16 +132,11 @@ class RedeemRepository
         return PaymentMethod::query()->where(['uid' => $uid])->first();
     }
 
-    public function saveRedeemOrder()
-    {
-
-    }
-
     /**
-     * 发起赎回申请   调用第三方接口
+     * 让信托公司给用户支付方式id打钱， 发起赎回申请   调用第三方接口
      * @return bool
      */
-    public function sendRedeemApply()
+    public function sendRedeemApply($money, $payment_method_id)
     {
         $api = Config::$API . '/v2/disbursements';
         $PrimetrustTokenRepository = new PrimetrustTokenRepository();
@@ -149,11 +145,11 @@ class RedeemRepository
         ];
         $data = [
             'account-id' => Config::$ACCOUNT_ID,
-            'amount' => -100,
-            'customer-reference' => '将与支付一起使用的参考信息',
+            'amount' => -$money,
+            'customer-reference' => '',
             'description' => '',
-            'payment-method-id' => '3245323',
-            'payment_method' => '',
+            'payment-method-id' => $payment_method_id,
+            'payment_method' => FuntionHelper::generate_uuid(),
         ];
         $res = CurlHelper::http($api, 'POST', $data, $header);
         $res = json_decode($res, true);

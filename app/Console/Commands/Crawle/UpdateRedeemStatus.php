@@ -77,72 +77,55 @@ class UpdateRedeemStatus extends Command
                     # 已转账订单，销毁代币
                     case 'OrderPaid':
                         $money = $val['token_amount'];
-                        $data = $ContractRepository->issueToken($money);
+                        $data = $ContractRepository->brunToken($money);
                         if(!empty($data) && $data['code'] == '200'){
                             # 更新订单状态
                             $updateData = [
                                 'order_status_hashcode' => $data['hashcode'],
-                                'order_status' => 'issueToken',
+                                'order_status' => 'brunToken',
                             ];
-                            $PurchaseRepository->updatePurchaseOrder($val['id'], $updateData);
+                            $RedeemRepository->updateRedeemOrder($val['id'], $updateData);
                         } else {
                             # 超时失效
                             if(time() - strtotime($val['created_at']) > Config::$ORDER_EXPIRY){
-                                $PurchaseRepository->updateOrderStatus($val['id'], 'overdue');
+                                $RedeemRepository->updateRedeemOrderStatus($val['id'], 'overdue');
                             }
                         }
                         break;
-                    # 检查订单，增发代币是否成功
-                    case 'issueToken':
+                    # 检查代币销毁状态
+                    case 'brunToken':
                         $hashcode = $val['order_status_hashcode'];
                         $data = $ContractRepository->getTransactionReceipt($hashcode);
                         if(!empty($data) && $data['code'] == '200'){
                             # 更新订单状态
                             $updateData = [
-                                'order_status' => 'issueTokenSuccess',
+                                'order_status' => 'brunTokenSuccess',
                             ];
-                            $PurchaseRepository->updatePurchaseOrder($val['id'], $updateData);
+                            $RedeemRepository->updateRedeemOrder($val['id'], $updateData);
                         } else {
                             # 超时失效
                             if(time() - strtotime($val['created_at']) > Config::$ORDER_EXPIRY){
-                                $PurchaseRepository->updateOrderStatus($val['id'], 'overdue');
+                                $RedeemRepository->updateRedeemOrderStatus($val['id'], 'overdue');
                             }
                         }
                         break;
-                    # 以增发代币订单 给用户转币
-                    case 'issueTokenSuccess':
+                    # 让信托公司给用户支付方式id打钱
+                    case 'brunTokenSuccess':
                         $money = $val['token_amount'];
-                        $to = $val['wallet_address'];
-                        $data = $ContractRepository->transferToken($money, $to);
+                        $payment_method_info = $RedeemRepository->getPaymentMethod($val['uid']);
+                        $payment_method_id = $payment_method_info['payment_method_id'];
+                        $data = $RedeemRepository->sendRedeemApply($money, $payment_method_id);
                         if(!empty($data) && $data['code'] == '200'){
                             # 更新订单状态
                             $updateData = [
-                                'order_status_hashcode' => $data['hashcode'],
-                                'order_status' => 'transferToken',
+                                'order_status' => 'redeemStart',
+                                'primetrust_redeem_id' => $data['data']['id'],
                             ];
-                            $PurchaseRepository->updatePurchaseOrder($val['id'], $updateData);
+                            $RedeemRepository->updateRedeemOrder($val['id'], $updateData);
                         } else {
                             # 超时失效
                             if(time() - strtotime($val['created_at']) > Config::$ORDER_EXPIRY){
-                                $PurchaseRepository->updateOrderStatus($val['id'], 'overdue');
-                            }
-                        }
-                        break;
-
-                    # 检查转账订单状态
-                    case 'transferToken':
-                        $hashcode = $val['order_status_hashcode'];
-                        $data = $ContractRepository->getTransactionReceipt($hashcode);
-                        if(!empty($data) && $data['code'] == '200'){
-                            # 更新订单状态
-                            $updateData = [
-                                'order_status' => 'transferTokenSuccess',
-                            ];
-                            $PurchaseRepository->updatePurchaseOrder($val['id'], $updateData);
-                        } else {
-                            # 超时失效
-                            if(time() - strtotime($val['created_at']) > Config::$ORDER_EXPIRY){
-                                $PurchaseRepository->updateOrderStatus($val['id'], 'overdue');
+                                $RedeemRepository->updateRedeemOrderStatus($val['id'], 'overdue');
                             }
                         }
                         break;
