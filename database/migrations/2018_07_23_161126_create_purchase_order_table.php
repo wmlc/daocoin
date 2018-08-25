@@ -28,6 +28,8 @@ class CreatePurchaseOrderTable extends Migration
             $table->string('purchase_rate', 10)->comment('购买率');
             $table->string('dcp_in_return', 10)->comment('返还积分');
             $table->string('purchase_method', 10)->comment('购买方式，visa|ach|wire');
+            $table->string('order_status_hashcode', 100)->default('')->comment('订单状态对应hashcode');
+
         });
         DB::statement("ALTER TABLE `purchase_order` comment '购买订单表'");
     }

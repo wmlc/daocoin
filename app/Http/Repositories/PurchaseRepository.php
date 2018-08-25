@@ -81,6 +81,10 @@ class PurchaseRepository
         return $orderModel->save();
     }
 
+    public function updatePurchaseOrder($id, $data){
+        return Order::query()->where(['id' => $id])->update($data);
+    }
+
     public function updateOrderStatus($orderId, $orderStatus){
         $orderModel = Order::query()->find($orderId);
         $orderModel->order_status = $orderStatus;
